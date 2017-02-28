@@ -1,4 +1,4 @@
-import Adafruit.GPIO.I2C as I2C
+from Adafruit.GPIO import I2C
 import math
 
 class LSM9DS0(object):
@@ -200,7 +200,7 @@ class LSM9DS0(object):
             'y':    3,
             'z':    5
         }
-        
+
         return data
 
     def kalman_filter(self):

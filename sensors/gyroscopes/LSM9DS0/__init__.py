@@ -1,4 +1,3 @@
-from .. import *
 import LSM9DS0
 
 # create LSM9DS0 instance
