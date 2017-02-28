@@ -1,1 +1,1 @@
-from Adafruit.GPIO import *
+__all__ 	= ["Adafruit"]
