@@ -89,52 +89,123 @@ class LSM9DS0(object):
     LSM9DS0_GYROSCALE_500DPS             = 0b01 << 4
     LSM9DS0_GYROSCALE_2000DPS            = 0b10 << 4
 
+    DT                                  = 0.01
+    RAD_TO_DEG                          = 57.29578  # 1 radian = 57.29578 degrees
+    M_PI                                = 3.14159265358979323846
+    GYRO_SENSITIVITY                    = 0.07
+
     def __init__(self,bus):
     	# grab addresses for each (gyroscope, accelerometer and magnetometer)
 
     	# initialize magnetometer
+        self.mag    = I2C.get_i2c_device(self.LSM9DS0_MAG_ADDRESS, bus)
+        self.mag.write8(self.LSM9DS0_CTRL_REG5_XM, 0b11110000) # Temperature sensor enabled, high res mag, 50Hz
+        self.mag.write8(self.LSM9DS0_CTRL_REG6_XM, 0b01100000) # +/- 12 gauss
+        self.mag.write8(self.LSM9DS0_CTRL_REG7_XM, 0b00000000) # Normal mode, continuous-conversion mode
 
     	# initialize accelerometer
+        self.accel  = I2C.get_i2c_device(self.LSM9DS0_ACCEL_ADDRESS, bus)
+        self.accel.write8(self.LSM9DS0_CTRL_REG1_XM, 0b01100111) # 100Hz, XYZ enabled
+        self.accel.write8(self.LSM9DS0_CTRL_REG2_XM, 0b00100000) # +/- 16 g
 
     	# initialize gyroscope
+        self.gyro   = I2C.get_i2c_device(self.LSM9DS0_GYRO_ADDRESS, bus)
+        self.gyro.write8(self.LSM9DS0_CTRL_REG1_G, 0b00001111) # Normal power mode, XYZ enabled
+        self.gyro.write8(self.LSM9DS0_CTRL_REG4_G, 0b00110000) # Continuous update, 2000 dps
 
-    	# initialize variables
+        # initialize variables
+        
+        return
 
-    def gyroscope():
+    def gyroscope(self):
     	# get raw gyroscope data
+        gyroX = self.gyro.readU8(self.LSM9DS0_OUT_X_L_G) | self.gyro.readU8(self.LSM9DS0_OUT_X_H_G) << 8
+        gyroY = self.gyro.readU8(self.LSM9DS0_OUT_Y_L_G) | self.gyro.readU8(self.LSM9DS0_OUT_Y_H_G) << 8
+        gyroZ = self.gyro.readU8(self.LSM9DS0_OUT_Z_L_G) | self.gyro.readU8(self.LSM9DS0_OUT_Z_H_G) << 8
 
-    def accelerometer():
+        gyroArr = [gyroX, gyroY, gyroZ]
+
+        for i in range(len(gyroArr)):
+            if gyroArr[i] > 32767:
+                gyroArr[i] -= 65536
+
+        return gyroArr
+
+    def accelerometer(self):
     	# get raw accelerometer data
+        accelX = self.accel.readU8(self.LSM9DS0_OUT_X_L_A) | self.accel.readU8(self.LSM9DS0_OUT_X_H_A) << 8
+        accelY = self.accel.readU8(self.LSM9DS0_OUT_Y_L_A) | self.accel.readU8(self.LSM9DS0_OUT_Y_H_A) << 8
+        accelZ = self.accel.readU8(self.LSM9DS0_OUT_Z_L_A) | self.accel.readU8(self.LSM9DS0_OUT_Z_H_A) << 8
 
-    def magnetometer():
+        accelArr = [accelX, accelY, accelZ]
+
+        # Values are signed and therefore must be checked
+        for i in range(len(accelArr)):
+            if accelArr[i] > 32767:
+                accelArr[i] -= 65536
+
+        return accelArr
+
+    def magnetometer(self):
     	# get raw magnetometer data
+        magX = self.mag.readU8(self.LSM9DS0_OUT_X_L_M) | self.mag.readU8(self.LSM9DS0_OUT_X_H_M) << 8
+        magY = self.mag.readU8(self.LSM9DS0_OUT_Y_L_M) | self.mag.readU8(self.LSM9DS0_OUT_Y_H_M) << 8
+        magZ = self.mag.readU8(self.LSM9DS0_OUT_Z_L_M) | self.mag.readU8(self.LSM9DS0_OUT_Z_H_M) << 8
 
-    def roll():
+        magArr = [magX, magY, magZ]
+
+        for i in range(len(magArr)):
+            if magArr[i] > 32767:
+                magArr[i] -= 65536
+
+        return magArr
+
+    def temperature(self):
+        temp = self.mag.readList(self.LSM9DS0_OUT_TEMP_L_XM) | self.mag.readList(self.LSM9DS0_OUT_TEMP_H_XM) << 8
+
+        return temp
+
+    def roll(self):
     	# get roll
+        return
 
-    def pitch():
+    def pitch(self):
     	# get pitch
+        return
 
-    def yaw():
+    def yaw(self):
     	# get yaw
+        return
 
-    def dpsX():
+    def dpsX(self):
     	# get degrees per second on X axis
+        return
 
-    def dpsY():
+    def dpsY(self):
     	# get degrees per second on Y axis
+        return
 
-    def dpsZ():
+    def dpsZ(self):
     	# get degrees per second on Z axis
+        return
 
-    def filtered():
+    def filtered(self):
     	# get filtered data
+        return self.complementary_filter()
 
-    def complementary_filter():
+    def complementary_filter(self):
     	# run complementary filter methodology
+        data    = {
+            'x':    1,
+            'y':    3,
+            'z':    5
+        }
+        
+        return data
 
-    def kalman_filter():
+    def kalman_filter(self):
     	# run kalman filter methodology
+        return
 
 
 
