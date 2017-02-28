@@ -1,5 +1,5 @@
 class I2C(object):
-	def __init__(self):
+	def __init__(self,bus):
 		# initialize I2C object
 
 	def read(address):
