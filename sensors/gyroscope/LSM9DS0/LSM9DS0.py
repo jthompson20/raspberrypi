@@ -2,7 +2,7 @@ import Adafruit.GPIO.I2C as I2C
 import math
 
 class LSM9DS0(object):
-	# set global variables
+    # set global variables
     # The same address is used for both the magnetometer and accelerometer, but
     # each has their own variable, to avoid confusion.
     LSM9DS0_MAG_ADDRESS	    =   0x1D
@@ -88,53 +88,53 @@ class LSM9DS0(object):
     LSM9DS0_GYROSCALE_245DPS             = 0b00 << 4
     LSM9DS0_GYROSCALE_500DPS             = 0b01 << 4
     LSM9DS0_GYROSCALE_2000DPS            = 0b10 << 4
-    
-	def __init__(self,bus):
-		# grab addresses for each (gyroscope, accelerometer and magnetometer)
 
-		# initialize magnetometer
+    def __init__(self,bus):
+    	# grab addresses for each (gyroscope, accelerometer and magnetometer)
 
-		# initialize accelerometer
+    	# initialize magnetometer
 
-		# initialize gyroscope
+    	# initialize accelerometer
 
-		# initialize variables
+    	# initialize gyroscope
 
-	def gyroscope():
-		# get raw gyroscope data
+    	# initialize variables
 
-	def accelerometer():
-		# get raw accelerometer data
+    def gyroscope():
+    	# get raw gyroscope data
 
-	def magnetometer():
-		# get raw magnetometer data
+    def accelerometer():
+    	# get raw accelerometer data
 
-	def roll():
-		# get roll
+    def magnetometer():
+    	# get raw magnetometer data
 
-	def pitch():
-		# get pitch
+    def roll():
+    	# get roll
 
-	def yaw():
-		# get yaw
+    def pitch():
+    	# get pitch
 
-	def dpsX():
-		# get degrees per second on X axis
+    def yaw():
+    	# get yaw
 
-	def dpsY():
-		# get degrees per second on Y axis
+    def dpsX():
+    	# get degrees per second on X axis
 
-	def dpsZ():
-		# get degrees per second on Z axis
+    def dpsY():
+    	# get degrees per second on Y axis
 
-	def filtered():
-		# get filtered data
+    def dpsZ():
+    	# get degrees per second on Z axis
 
-	def complementary_filter():
-		# run complementary filter methodology
+    def filtered():
+    	# get filtered data
 
-	def kalman_filter():
-		# run kalman filter methodology
+    def complementary_filter():
+    	# run complementary filter methodology
+
+    def kalman_filter():
+    	# run kalman filter methodology
 
 
 
