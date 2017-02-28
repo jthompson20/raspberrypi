@@ -1,3 +1,5 @@
+import sys
+sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-2])))
 from Adafruit.GPIO import I2C
 import math
 
