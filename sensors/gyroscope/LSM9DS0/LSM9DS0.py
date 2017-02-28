@@ -1,4 +1,4 @@
-import I2C
+import Adafruit.GPIO.I2C as I2C
 import math
 
 class LSM9DS0(object):
