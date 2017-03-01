@@ -101,6 +101,12 @@ class LSM9DS0(object):
     RAD_TO_DEG                          = 57.29578  # 1 radian = 57.29578 degrees
     M_PI                                = 3.14159265358979323846
     GYRO_SENSITIVITY                    = 0.07
+    gyroXangle		= 0
+    gyroYangle		= 0
+    gyroZangle 		= 0
+    CFangleX 		= 0
+    CFangleY 		= 0
+    CFangleZ 		= 0
 
     def __init__(self,bus):
     	# grab addresses for each (gyroscope, accelerometer and magnetometer)
@@ -206,15 +212,15 @@ class LSM9DS0(object):
         PI_F    = math.pi
         orient  = {
             'gyro':     {
-                'raw':  self.rawGyro(),
+                'raw':  self.gyroscope(),
                 'dps':  []
             },
             'accel':    {
-                'raw':      self.rawAccel(),
+                'raw':      self.accelerometer(),
                 'degrees':  []
             },
             'mag':      {
-                'raw':  self.rawMag()
+                'raw':  self.magnetometer()
             },
             'temp':     {
                 'raw':  ''
@@ -235,10 +241,10 @@ class LSM9DS0(object):
         self.gyroYangle     += orient['gyro']['dps'][1] * self.DT
         self.gyroZangle     += orient['gyro']['dps'][2] * self.DT
 
-            # get roll, pitch and yaw
-            roll    = ((math.atan2(orient['accel']['raw'][1],orient['accel']['raw'][2])+self.M_PI)*self.RAD_TO_DEG)
-            pitch   = ((math.atan2(orient['accel']['raw'][2],orient['accel']['raw'][0])+self.M_PI)*self.RAD_TO_DEG)
-            yaw     = (math.atan2(orient['mag']['raw'][2] * math.sin(roll) - orient['mag']['raw'][1] * math.cos(roll), orient['mag']['raw'][0] * math.cos(pitch) + orient['mag']['raw'][1] * math.sin(pitch) * math.sin(roll) + orient['mag']['raw'][2] * math.sin(pitch) * math.cos(roll)))
+	# get roll, pitch and yaw
+	roll    = ((math.atan2(orient['accel']['raw'][1],orient['accel']['raw'][2])+self.M_PI)*self.RAD_TO_DEG)
+	pitch   = ((math.atan2(orient['accel']['raw'][2],orient['accel']['raw'][0])+self.M_PI)*self.RAD_TO_DEG)
+	yaw     = (math.atan2(orient['mag']['raw'][2] * math.sin(roll) - orient['mag']['raw'][1] * math.cos(roll), orient['mag']['raw'][0] * math.cos(pitch) + orient['mag']['raw'][1] * math.sin(pitch) * math.sin(roll) + orient['mag']['raw'][2] * math.sin(pitch) * math.cos(roll)))
             
         # convert accelerometer data to degrees
         orient['accel']['degrees']  = [roll,pitch,yaw]
@@ -246,12 +252,12 @@ class LSM9DS0(object):
         # run complementary filter (reset current angle)
         self.CFangleX   = 0.98*(self.CFangleX+orient['gyro']['dps'][0]*self.DT)+(0.02*orient['accel']['degrees'][0])
         self.CFangleY   = 0.98*(self.CFangleY+orient['gyro']['dps'][1]*self.DT)+(0.02*orient['accel']['degrees'][1])
-            self.CFangleZ   = 0.98*(self.CFangleZ+orient['gyro']['dps'][2]*self.DT)+(0.02*orient['accel']['degrees'][2])
+	self.CFangleZ   = 0.98*(self.CFangleZ+orient['gyro']['dps'][2]*self.DT)+(0.02*orient['accel']['degrees'][2])
 
         # set filtered response
         orient['filtered']['x']     = self.CFangleX
         orient['filtered']['y']     = self.CFangleY
-        orient['filtered']['z']         = self.CFangleZ
+        orient['filtered']['z']     = self.CFangleZ
 
         return orient
 
