@@ -203,13 +203,57 @@ class LSM9DS0(object):
 
     def complementary_filter(self):
     	# run complementary filter methodology
-        data    = {
-            'x':    1,
-            'y':    3,
-            'z':    5
+        PI_F    = math.pi
+        orient  = {
+            'gyro':     {
+                'raw':  self.rawGyro(),
+                'dps':  []
+            },
+            'accel':    {
+                'raw':      self.rawAccel(),
+                'degrees':  []
+            },
+            'mag':      {
+                'raw':  self.rawMag()
+            },
+            'temp':     {
+                'raw':  ''
+            },
+            'filtered':     {
+                    'x':    0.0,
+                    'y':    0.0,
+                    'z':    0.0
+                }
         }
 
-        return data
+
+        # convert gyro raw to degrees per second
+        orient['gyro']['dps']   = [(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY),(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY),(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY)]
+
+        # track this gyro over time
+        self.gyroXangle     += orient['gyro']['dps'][0] * self.DT
+        self.gyroYangle     += orient['gyro']['dps'][1] * self.DT
+        self.gyroZangle     += orient['gyro']['dps'][2] * self.DT
+
+            # get roll, pitch and yaw
+            roll    = ((math.atan2(orient['accel']['raw'][1],orient['accel']['raw'][2])+self.M_PI)*self.RAD_TO_DEG)
+            pitch   = ((math.atan2(orient['accel']['raw'][2],orient['accel']['raw'][0])+self.M_PI)*self.RAD_TO_DEG)
+            yaw     = (math.atan2(orient['mag']['raw'][2] * math.sin(roll) - orient['mag']['raw'][1] * math.cos(roll), orient['mag']['raw'][0] * math.cos(pitch) + orient['mag']['raw'][1] * math.sin(pitch) * math.sin(roll) + orient['mag']['raw'][2] * math.sin(pitch) * math.cos(roll)))
+            
+        # convert accelerometer data to degrees
+        orient['accel']['degrees']  = [roll,pitch,yaw]
+
+        # run complementary filter (reset current angle)
+        self.CFangleX   = 0.98*(self.CFangleX+orient['gyro']['dps'][0]*self.DT)+(0.02*orient['accel']['degrees'][0])
+        self.CFangleY   = 0.98*(self.CFangleY+orient['gyro']['dps'][1]*self.DT)+(0.02*orient['accel']['degrees'][1])
+            self.CFangleZ   = 0.98*(self.CFangleZ+orient['gyro']['dps'][2]*self.DT)+(0.02*orient['accel']['degrees'][2])
+
+        # set filtered response
+        orient['filtered']['x']     = self.CFangleX
+        orient['filtered']['y']     = self.CFangleY
+        orient['filtered']['z']         = self.CFangleZ
+
+        return orient
 
     def kalman_filter(self):
     	# run kalman filter methodology
