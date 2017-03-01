@@ -1,7 +1,13 @@
 import sys
-sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-2])))
-from Adafruit.GPIO import I2C
+import os
 import math
+
+# needed in order to import Adafruit library a few directories back
+sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-4])))
+
+import Adafruit.GPIO.I2C as I2C
+
+
 
 class LSM9DS0(object):
     # set global variables
