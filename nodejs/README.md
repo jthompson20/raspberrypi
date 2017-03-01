@@ -8,3 +8,6 @@ Guide to installing node.js on rpi: http://thisdavej.com/beginners-guide-to-inst
 
 ## Issue installing raspi-io:
 - https://github.com/glenpike/npm-g_nosudo
+
+## Cool Projects
+- http://thisdavej.com/tag/raspi/
