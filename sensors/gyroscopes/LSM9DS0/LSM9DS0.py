@@ -234,7 +234,10 @@ class LSM9DS0(object):
 
 
         # convert gyro raw to degrees per second
-        orient['gyro']['dps']   = [(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY),(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY),(orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY)]
+        dpsX    = (orient['gyro']['raw'][0]*self.GYRO_SENSITIVITY)
+        dpsY    = (orient['gyro']['raw'][1]*self.GYRO_SENSITIVITY)
+        dpsZ    = (orient['gyro']['raw'][2]*self.GYRO_SENSITIVITY)
+        orient['gyro']['dps']   = [dpsX,dpsY,dpsZ]
 
         # track this gyro over time
         self.gyroXangle     += orient['gyro']['dps'][0] * self.DT
