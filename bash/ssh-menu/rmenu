@@ -1,0 +1,121 @@
+#!/bin/bash
+#!/bin/bash
+## USAGE
+##   rmenu [options]
+##
+## DESCRIPTION
+##   rmenu (remote menu) displays a user-friendly menu. A typical use case is to
+##   display the menu when certain remote hosts connect using SSH. The menu is
+##   displayed if the host is included in an rmenu_hosts file (contained in
+##   the same directory as the rmenu script).  The rmenu command is typically
+##   added to the user .profile (rmenu -c) so it will be invoked when a user
+##   connects remotely through SSH.  To always show the menu no matter what
+##   remote host connects, simply invoke rmenu without any parameters.
+##
+##   This script was originally created to enable a menu to appear when
+##   connecting to a Raspberry Pi from an SSH client running on a mobile device.
+##   Feel free to use this script and tweak the menu and make it useful for your
+##   context!
+##
+## OPTIONS
+##   -c, --conditional    Show menu if remote host is in the rmenu_hosts file.
+##                        The rmenu_hosts file needs to be in the same directory
+##                        as the rmenu script. If remote host is not coming
+##                        through SSH, menu will not be shown either.
+##  -m , --menu_num       The menu number to invoke. By default, the menu code in
+##                        menu1.sh to display the menu. You can create additional
+##                        files in the same directory as rmenu such as menu2.sh
+##                        to invoke different menus.
+##
+##   -h, --help           Display this message.
+##
+## Example rmenu_hosts file (lines starting with "#" are ignored)
+##   android-dg36j7a3b4893283
+##   #thisdavejpc
+##
+## DEPENDENCIES
+##   whiptail
+##
+## IMPLEMENTATION
+##   Author: Dave Johnson (http://thisdavej.com/)
+##   Copyright: Copyright (c) http://thisdavej.com/
+##   License: MIT License (MIT)
+##
+confirmAnswer () {
+    whiptail --title "Confirmation" --yes-button "Yes" --no-button "No"  --defaultno --yesno "$1" 8 36
+    return $?
+    # returns 0 = yes, 1 = no, 255 = escape key hit
+}
+# Modify the menu and commands below to suit your needs. On my Android device, five menu items is a good
+# number to avoid vertical scrolling.
+show_menu_if_host_in_list () {
+    # If we are not coming through SSH (we are in through VNC, etc.), $SSH_CONNECTION will not be set.
+    # Don't the menu in this case if someone invokes directly from the terminal.  Most of the time, the
+    # rmenu command will be invoked through .profile and .profile is not used when launching terminal
+    # sessions from the desktop, only when connecting through an SSH connection.
+    if [ -z "$SSH_CONNECTION" ]; then
+        clear
+        show_menu
+        exit
+    fi
+    DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    menuhosts_file=$DIR/rmenu_hosts
+    if [ ! -f "$menuhosts_file" ]; then
+        echo "$menuhosts_file" file not found. Cannot evaluate whether remote host is in the list.
+        exit 1
+    fi
+    declare -a MENU_HOSTS
+    MENU_HOSTS=( `cat "$menuhosts_file"`)
+    SSH_CLIENT_IP=${SSH_CONNECTION%% *}
+    SSH_HOST_NAME=$(host $SSH_CLIENT_IP | awk '/domain name pointer/ { printf $5 }'| sed 's/\.$//')
+    # Make upper case for string comparison
+    SSH_HOST_NAME=${SSH_HOST_NAME^^}
+    FOUND_MATCH=false
+    for i in "${MENU_HOSTS[@]}"
+    do
+        if [[ "$i" == "#"* ]]; then
+            continue
+        fi
+       if [ "$SSH_HOST_NAME" == "${i^^}" ]; then
+            FOUND_MATCH=true
+            break
+       fi
+    done
+    if $FOUND_MATCH; then
+        clear
+        show_menu
+    fi
+}
+usage() {
+  [ "$*" ] && echo "$0: $*"
+  sed -n '/^##/,/^$/s/^## \{0,1\}//p' "$0"
+  exit 2
+} 2>/dev/null
+MENU_NUMBER='default'
+while [[ $# -gt 0 ]]
+do
+key="$1"
+case $key in
+    -c|--conditional)
+    CONDITIONAL=true
+    ;;
+    -m|--menu_num)
+  MENU_NUMBER="$2"
+  shift
+    ;;
+    -h|--help)
+    usage
+    ;;
+    *)
+        # unknown option
+    ;;
+esac
+shift # past argument or value
+done
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DIR/menu-$MENU_NUMBER.sh
+if [ "$CONDITIONAL" = true ] ; then
+    show_menu_if_host_in_list
+else
+    show_menu
+fi
