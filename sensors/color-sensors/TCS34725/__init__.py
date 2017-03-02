@@ -1,47 +1,58 @@
-# Distributed with a free-will license.
-# Use it any way you want, profit or free, provided it fits in the licenses of its associated works.
-# TCS3414
-# This code is designed to work with the TCS3414_I2CS I2C Mini Module available from ControlEverything.com.
-# https://www.controleverything.com/content/Color?sku=TCS3414_I2CS#tabs-0-product_tabset-2
-
-import smbus
 import time
+import smbus
+import TCS34725
 
-# Get I2C bus
-bus = smbus.SMBus(1)
+sensor 	= TCS34725.TCS34725()
 
 while True:
+	# You can also override the I2C device address and/or bus with parameters:
+	#tcs = Adafruit_TCS34725.TCS34725(address=0x30, busnum=2)
 
-	# TCS3414 address, 0x39(57)
-	# Select control register, 0x00(00), with Command register, 0x80(128)
-	#		0x03(03)	Power ON, ADC enable
-	bus.write_byte_data(0x29, 0x00 | 0x80, 0x03)
-	# TCS3414 address, 0x39(57)
-	# Select gain register, 0x07(07), with Command register, 0x80(128)
-	#		0x00(00)	Gain : 1x, Prescaler Mode = Divide by 1
-	bus.write_byte_data(0x29, 0x07 | 0x80, 0x00)
+	# Or you can change the integration time and/or gain:
+	#tcs = Adafruit_TCS34725.TCS34725(integration_time=Adafruit_TCS34725.TCS34725_INTEGRATIONTIME_700MS,
+	#                                 gain=Adafruit_TCS34725.TCS34725_GAIN_60X)
+	# Possible integration time values:
+	#  - TCS34725_INTEGRATIONTIME_2_4MS  (2.4ms, default)
+	#  - TCS34725_INTEGRATIONTIME_24MS
+	#  - TCS34725_INTEGRATIONTIME_50MS
+	#  - TCS34725_INTEGRATIONTIME_101MS
+	#  - TCS34725_INTEGRATIONTIME_154MS
+	#  - TCS34725_INTEGRATIONTIME_700MS
+	# Possible gain values:
+	#  - TCS34725_GAIN_1X
+	#  - TCS34725_GAIN_4X
+	#  - TCS34725_GAIN_16X
+	#  - TCS34725_GAIN_60X
 
-	time.sleep(0.5)
+	# Disable interrupts (can enable them by passing true, see the set_interrupt_limits function too).
+	tcs.set_interrupt(False)
 
-	# TCS3414 address, 0x39(57)
-	# Read data back from 0x10(16), 8 bytes, with Command register, 0x80(128)
-	# Green LSB, Green MSB, Red LSB, Red MSB
-	# Blue LSB, Blue MSB, cData LSB, cData MSB
-	data = bus.read_i2c_block_data(0x29, 0x10 | 0x80, 8)
+	# Read the R, G, B, C color data.
+	r, g, b, c = tcs.get_raw_data()
 
-	# Convert the data
-	green = data[1] * 256 + data[0]
-	red = data[3] * 256 + data[2]
-	blue = data[5] * 256 + data[4]
-	cData = data[7] * 256 + data[6]
+	# Calculate color temperature using utility functions.  You might also want to
+	# check out the colormath library for much more complete/accurate color functions.
+	color_temp = Adafruit_TCS34725.calculate_color_temperature(r, g, b)
 
-	# Calculate luminance
-	luminance = (-0.32466 * red) + (1.57837 * green) + (-0.73191 * blue)
+	# Calculate lux with another utility function.
+	lux = Adafruit_TCS34725.calculate_lux(r, g, b)
 
-	# Output data to screen
-	print "Green Color Luminance : %d lux" %green
-	print "Red Color Luminance : %d lux" %red
-	print "Blue Color Luminance : %d lux" %blue
-	print "Clear Data Luminance : %d lux" %cData
-	print "Ambient Light Luminance : %.2f lux" %luminance
-	print ""
+	# Print out the values.
+	print('Color: red={0} green={1} blue={2} clear={3}'.format(r, g, b, c))
+
+	# Print out color temperature.
+	if color_temp is None:
+	    print('Too dark to determine color temperature!')
+	else:
+	    print('Color Temperature: {0} K'.format(color_temp))
+
+	# Print out the lux.
+	print('Luminosity: {0} lux'.format(lux))
+
+	# Enable interrupts and put the chip back to low power sleep/disabled.
+	tcs.set_interrupt(True)
+	tcs.disable()
+
+
+
+	
