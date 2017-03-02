@@ -2,7 +2,7 @@ import time
 import smbus
 import TCS34725
 
-sensor 	= TCS34725.TCS34725()
+tcs 	= TCS34725.TCS34725()
 
 while True:
 	# You can also override the I2C device address and/or bus with parameters:
@@ -55,4 +55,3 @@ while True:
 
 
 
-	
