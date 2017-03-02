@@ -71,6 +71,8 @@ rgb.on('ready', function() {
 
     });
 
+    console.log('data: ',data);
+
     // push the data to pubnub
     //var message = { eon: eon };
     pubnub.publish({
