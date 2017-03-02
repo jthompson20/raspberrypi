@@ -15,11 +15,11 @@ while True:
 	# TCS3414 address, 0x39(57)
 	# Select control register, 0x00(00), with Command register, 0x80(128)
 	#		0x03(03)	Power ON, ADC enable
-	bus.write_byte_data(0x39, 0x00 | 0x80, 0x03)
+	bus.write_byte_data(0x29, 0x00 | 0x80, 0x03)
 	# TCS3414 address, 0x39(57)
 	# Select gain register, 0x07(07), with Command register, 0x80(128)
 	#		0x00(00)	Gain : 1x, Prescaler Mode = Divide by 1
-	bus.write_byte_data(0x39, 0x07 | 0x80, 0x00)
+	bus.write_byte_data(0x29, 0x07 | 0x80, 0x00)
 
 	time.sleep(0.5)
 
@@ -27,7 +27,7 @@ while True:
 	# Read data back from 0x10(16), 8 bytes, with Command register, 0x80(128)
 	# Green LSB, Green MSB, Red LSB, Red MSB
 	# Blue LSB, Blue MSB, cData LSB, cData MSB
-	data = bus.read_i2c_block_data(0x39, 0x10 | 0x80, 8)
+	data = bus.read_i2c_block_data(0x29, 0x10 | 0x80, 8)
 
 	# Convert the data
 	green = data[1] * 256 + data[0]
