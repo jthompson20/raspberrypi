@@ -49,9 +49,9 @@ while True:
 	# Print out the lux.
 	print('Luminosity: {0} lux'.format(lux))
 
-	# Enable interrupts and put the chip back to low power sleep/disabled.
-	tcs.set_interrupt(True)
-	tcs.disable()
+# Enable interrupts and put the chip back to low power sleep/disabled.
+tcs.set_interrupt(True)
+tcs.disable()
 
 
 
