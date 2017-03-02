@@ -46,6 +46,8 @@ rgb.on('ready', function() {
       data.blue 	= colors.blue;
       data.clear 	= colors.clear;
 
+      send_to_pubnub(data);
+
     });
 
     // get color temperature values in degrees Kelvin
@@ -56,6 +58,7 @@ rgb.on('ready', function() {
       
       // set result
       data.temp 	= temp;
+      send_to_pubnub(data);
 
     });
 
@@ -68,20 +71,24 @@ rgb.on('ready', function() {
 
       // set result
       data.lux 		= lux;
+      send_to_pubnub(data);
 
     });
 
     console.log('data: ',data);
-
-    // push the data to pubnub
-    //var message = { eon: eon };
-    pubnub.publish({
-        channel   : 'eon-sensor-tcs34725',
-        message   : { eon: data },
-    });
 
 
     
   }, 1000);
 
 });
+
+
+function send_to_pubnub(data){
+    // push the data to pubnub
+    //var message = { eon: eon };
+    pubnub.publish({
+        channel   : 'eon-sensor-tcs34725',
+        message   : { eon: data },
+    });
+}
