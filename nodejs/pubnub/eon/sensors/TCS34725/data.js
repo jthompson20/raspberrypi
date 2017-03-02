@@ -20,6 +20,9 @@ rgb.on('ready', function() {
   // get raw RGBC (red, green, blue, clear) values 
   setInterval(function() {
 
+  	// initialize data to send to pubnub
+  	eon 	= {};
+
   	// get raw RGB data
     rgb.getRawData(function(err, colors) {
       
@@ -30,6 +33,9 @@ rgb.on('ready', function() {
       console.log('BLUE:', colors.blue);
       console.log('CLEAR:', colors.clear);
 
+      // set result
+      eon 	= colors;
+
     });
 
     // get color temperature values in degrees Kelvin
@@ -37,6 +43,9 @@ rgb.on('ready', function() {
       if (err) throw err;
 
       console.log('TEMP:', temp);
+      
+      // set result
+      eon.temp 	= temp;
 
     });
 
@@ -47,26 +56,20 @@ rgb.on('ready', function() {
       console.log('LUX:', lux);
       console.log('');
 
-    })
+      // set result
+      eon.lux 	= lux;
+
+    });
+
+    // push the data to pubnub
+    var message = { eon: eon };
+    pubnub.publish({
+        channel   : 'eon-sensor-tcs34725',
+        message   : message,
+    });
 
 
     
   }, 1000);
 
 });
-
-
-
-/*
-var number = 100;
-function publish() {
-    number += (Math.random() - 0.5);
-    var message = { eon: {"value" : number} };
-    console.log("sending",message);
-    pubnub.publish({
-        channel   : 'example-eon',
-        message   : message,
-    });
-}
-setInterval(publish,3*1000); //every three seconds
-*/
