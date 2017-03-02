@@ -32,10 +32,10 @@ while True:
 
 	# Calculate color temperature using utility functions.  You might also want to
 	# check out the colormath library for much more complete/accurate color functions.
-	color_temp = Adafruit_TCS34725.calculate_color_temperature(r, g, b)
+	color_temp = TCS34725.calculate_color_temperature(r, g, b)
 
 	# Calculate lux with another utility function.
-	lux = Adafruit_TCS34725.calculate_lux(r, g, b)
+	lux = TCS34725.calculate_lux(r, g, b)
 
 	# Print out the values.
 	print('Color: red={0} green={1} blue={2} clear={3}'.format(r, g, b, c))
