@@ -25,7 +25,14 @@
 </head>
 <body>
 
-<div id="chart"></div>
+<div id="chart">
+	<div id="red"></div>
+	<div id="green"></div>
+	<div id="blue"></div>
+	<div id="clear"></div>
+	<div id="temp"></div>
+	<div id="lux"></div>
+</div>
 
 <script type="text/javascript">
 var pubnub = new PubNub({
@@ -37,20 +44,24 @@ eon.chart({
         bindto: '#chart',
         data: {
             type:'spline',
+            /*
             colors: {
                 value0:'#ffaaaa',
                 value1:'#cc8888',
                 value2:'#aa4444',
                 value3:'#882222',
-                value4:'#660000'
+                value4:'#660000',
+                value5:'#000000'
             },
             names: {
-                value0: "SFO",
-                value1: "DFW",
-                value2: "ATL",
-                value3: "BOS",
-                value4: "LAX"
+                value0: "RED",
+                value1: "GREEN",
+                value2: "BLUE",
+                value3: "CLEAR",
+                value4: "TEMP",
+                value5: "LUX"
             }
+            */
         },
         point: {
             show: false
@@ -64,7 +75,7 @@ eon.chart({
             },
             y: {
                 label: {
-                    text: 'Temperature',
+                    text: 'Color Sensor Readings',
                     position: 'outer-middle'
                 }
             }

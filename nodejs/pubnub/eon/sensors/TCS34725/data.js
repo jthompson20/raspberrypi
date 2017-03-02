@@ -21,7 +21,14 @@ rgb.on('ready', function() {
   setInterval(function() {
 
   	// initialize data to send to pubnub
-  	eon 	= {};
+  	data 	= {
+  		'red': 		0,
+  		'green': 	0,
+  		'blue': 	0,
+  		'clear': 	0,
+  		'temp': 	0,
+  		'lux': 		0
+  	};
 
   	// get raw RGB data
     rgb.getRawData(function(err, colors) {
@@ -34,7 +41,10 @@ rgb.on('ready', function() {
       console.log('CLEAR:', colors.clear);
 
       // set result
-      eon 	= colors;
+      data.red 		= colors.red;
+      data.green 	= colors.green;
+      data.blue 	= colors.blue;
+      data.clear 	= colors.clear;
 
     });
 
@@ -45,7 +55,7 @@ rgb.on('ready', function() {
       console.log('TEMP:', temp);
       
       // set result
-      eon.temp 	= temp;
+      data.temp 	= temp;
 
     });
 
@@ -57,15 +67,15 @@ rgb.on('ready', function() {
       console.log('');
 
       // set result
-      eon.lux 	= lux;
+      data.lux 		= lux;
 
     });
 
     // push the data to pubnub
-    var message = { eon: eon };
+    //var message = { eon: eon };
     pubnub.publish({
         channel   : 'eon-sensor-tcs34725',
-        message   : message,
+        message   : { eon: data },
     });
 
 
