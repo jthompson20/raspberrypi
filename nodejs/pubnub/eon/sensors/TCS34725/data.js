@@ -29,6 +29,7 @@ rgb.on('ready', function() {
     });
     
   }, 1000);
+});
 
 
 
