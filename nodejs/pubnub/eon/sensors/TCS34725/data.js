@@ -17,7 +17,10 @@ var rgb = rgbLib.use({
 
 rgb.on('ready', function() {
   
+  // get raw RGBC (red, green, blue, clear) values 
   setInterval(function() {
+
+  	// get raw RGB data
     rgb.getRawData(function(err, colors) {
       
       if (err) throw err;
@@ -26,9 +29,30 @@ rgb.on('ready', function() {
       console.log('GREEN:', colors.green);
       console.log('BLUE:', colors.blue);
       console.log('CLEAR:', colors.clear);
+
     });
+
+    // get color temperature values in degrees Kelvin
+    rgb.calculateColorTemperature(function(err, temp) {
+      if (err) throw err;
+
+      console.log('TEMP:', temp);
+
+    });
+
+    // calculate lux
+    rgb.calculateLux(function(err, lux) {
+      if (err) throw err;
+
+      console.log('LUX:', lux);
+      console.log('');
+
+    })
+
+
     
   }, 1000);
+
 });
 
 
