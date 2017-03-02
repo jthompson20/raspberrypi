@@ -1,5 +1,5 @@
 var PubNub = require('pubnub');
-var rgbLib = require('TCS34725.js');
+var rgbLib = require('./TCS34725');
 
 // init pubnub
 var pubnub = new PubNub({
