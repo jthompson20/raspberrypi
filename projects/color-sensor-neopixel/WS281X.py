@@ -80,8 +80,8 @@ class WS281X(object):
 
 	def disable(self):
 		# Ensure ws2811_fini is called before the program quits.
-		ws.ws2811_fini(leds)
+		ws.ws2811_fini(self.leds)
 		# Example of calling delete function to clean up structure memory.  Isn't
 		# strictly necessary at the end of the program execution here, but is good practice.
-		ws.delete_ws2811_t(leds)
+		ws.delete_ws2811_t(self.leds)
 
