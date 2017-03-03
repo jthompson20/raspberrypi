@@ -34,7 +34,7 @@ if ver == 0x44:
 			print crgb
 
 			# update RGB
-			rgb.update(red,green,blue,clear)
+			rgb.update(red/255,green/255,blue/255,clear/255)
 			
 			# RGBC ADC wait time (see datasheet: https://cdn-shop.adafruit.com/datasheets/TCS34725.pdf)
 			time.sleep(.44)
