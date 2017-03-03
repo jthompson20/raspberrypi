@@ -19,7 +19,7 @@ try:
 		lux = TCS34725.calculate_lux(r, g, b)
 
 		# if lux if within range, update RGB colors
-		if lux > 50 && lux < 100:
+		if lux > 50 and lux < 100:
 			# update RGB
 			rgb.update(r,g,b,c)
 
