@@ -7,10 +7,10 @@ tcs 	= TCS34725.TCS34725()
 try:
 	sense_colors()
 except KeyboardInterrupt:
-	sense_colors()
-except e:
+	#sense_colors()
+	pass
+except:
 	print('caught exception')
-	print(e)
 	print('')
 finally:
 	# Enable interrupts and put the chip back to low power sleep/disabled.
