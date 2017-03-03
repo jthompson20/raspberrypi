@@ -27,8 +27,8 @@ try:
 
 except KeyboardInterrupt:
 	pass
-except:
-	pass
+except Exception as e:
+	print(e)
 finally:
 	# Enable interrupts and put the chip back to low power sleep/disabled for color sensor.
 	sensor.set_interrupt(True)
