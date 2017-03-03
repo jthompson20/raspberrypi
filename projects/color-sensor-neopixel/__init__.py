@@ -39,6 +39,8 @@ except KeyboardInterrupt:
 except Exception as e:
 	print(e)
 finally:
+	# turn rgb OFF
+	rgb.update(0,0,0,0)
 	# Enable interrupts and put the chip back to low power sleep/disabled for color sensor.
 	sensor.set_interrupt(True)
 	sensor.disable()

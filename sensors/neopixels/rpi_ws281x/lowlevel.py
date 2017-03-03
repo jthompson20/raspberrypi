@@ -81,8 +81,8 @@ try:
 		for i in range(LED_COUNT):
 			# Pick a color based on LED position and an offset for animation.
 			color = DOT_COLORS[(i + offset) % len(DOT_COLORS)]
+			color = Color(58,i,35,150)
 			print 'color: %d' % color
-			#color = Color(58,66,35,150)
 			# Set the LED color buffer value.
 			ws.ws2811_led_set(channel, i, color)
 
