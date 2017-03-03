@@ -32,7 +32,7 @@ try:
 			print 'updating rgb...'
 			rgb.update(r,g,b,c)
 
-		time.sleep(1)
+		#time.sleep(1)
 
 except KeyboardInterrupt:
 	pass
