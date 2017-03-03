@@ -54,7 +54,6 @@ try:
 		print('#%02x%02x%02x' % (r,g,b))
 		print('')
 except KeyboardInterrupt:
-	print('')
 	print('ending loop..')
 	print('')
 except:
