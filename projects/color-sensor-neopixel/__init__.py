@@ -15,12 +15,20 @@ try:
 		# Read the R, G, B, C color data.
 		r, g, b, c = sensor.get_raw_data()
 
+		print r
+		print g
+		print b
+
 		# Calculate lux with another utility function.
 		lux = TCS34725.calculate_lux(r, g, b)
+
+		print lux
+		print ''
 
 		# if lux if within range, update RGB colors
 		if lux > 50 and lux < 100:
 			# update RGB
+			print 'updating rgb...'
 			rgb.update(r,g,b,c)
 
 		time.sleep(1)
