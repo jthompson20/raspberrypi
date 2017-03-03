@@ -66,8 +66,12 @@ class WS281X(object):
 		return (c << 24) | (r << 16)| (g << 8) | b
 
 	def update(self,r,g,b,c):
+		newcolor 	= self.color(r,g,b,c)
+		print "new color:"
+		print newcolor
+		print ""
 		# Set the LED color buffer value.
-		ws.ws2811_led_set(self.channel, 1, self.color(r,g,b,c))
+		ws.ws2811_led_set(self.channel, 1, newcolor)
 
 		# Send the LED color data to the hardware.
 		resp = ws.ws2811_render(self.leds)
