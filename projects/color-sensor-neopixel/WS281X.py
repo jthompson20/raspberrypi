@@ -25,6 +25,13 @@ DOT_COLORS = [  0x200000,   # red
 				0x100010,   # purple
 				0x200010 ]  # pink
 
+def Color(red, green, blue, white = 0):
+	"""Convert the provided red, green, blue color to a 24-bit color value.
+	Each color component should be a value 0-255 where 0 is the lowest intensity
+	and 255 is the highest intensity.
+	"""
+	return (white << 24) | (red << 16)| (green << 8) | blue
+
 class WS281X(object):
 	def __init__(self,gpio):
 		if gpio:
@@ -59,7 +66,7 @@ class WS281X(object):
 			message = ws.ws2811_get_return_t_str(resp)
 			raise RuntimeError('ws2811_init failed with code {0} ({1})'.format(resp, message))
 
-	def color(self,r,g,b,c):
+	def color(self,r,g,b,c=0):
 		"""Convert the provided red, green, blue color to a 24-bit color value.
 		Each color component should be a value 0-255 where 0 is the lowest intensity
 		and 255 is the highest intensity.
@@ -67,13 +74,13 @@ class WS281X(object):
 		return (c << 24) | (r << 16)| (g << 8) | b
 
 	def update(self,r,g,b,c):
-		newcolor 	= self.color(r,g,b,c)
+		newcolor 	= Color(r,g,b,c)
 		print "new color:"
 		print newcolor
 		print ""
 		for i in range(LED_COUNT):
 			# Set the LED color buffer value.
-			ws.ws2811_led_set(self.channel, i, ctypes.c_uint32(self.color(r,g,b,c)).value)
+			ws.ws2811_led_set(self.channel, i, Color(r,g,b,c))
 
 		# Send the LED color data to the hardware.
 		resp = ws.ws2811_render(self.leds)
