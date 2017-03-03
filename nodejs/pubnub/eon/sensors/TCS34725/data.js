@@ -75,9 +75,6 @@ rgb.on('ready', function() {
 
     });
 
-    console.log('data: ',data);
-
-
     
   }, 1000);
 
