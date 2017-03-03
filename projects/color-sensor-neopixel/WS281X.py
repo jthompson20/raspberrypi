@@ -58,14 +58,14 @@ class WS281X(object):
 			message = ws.ws2811_get_return_t_str(resp)
 			raise RuntimeError('ws2811_init failed with code {0} ({1})'.format(resp, message))
 
-	def color(r,g,b,c):
+	def color(self,r,g,b,c):
 		"""Convert the provided red, green, blue color to a 24-bit color value.
 		Each color component should be a value 0-255 where 0 is the lowest intensity
 		and 255 is the highest intensity.
 		"""
 		return (c << 24) | (r << 16)| (g << 8) | b
 
-	def update(r,g,b,c):
+	def update(self,r,g,b,c):
 		# Set the LED color buffer value.
 		ws.ws2811_led_set(self.channel, 1, self.color(r,g,b,c))
 
@@ -77,13 +77,11 @@ class WS281X(object):
 
 		# Delay for a small period of time.
 		time.sleep(0.25)
-		return
 
-	def disable():
+	def disable(self):
 		# Ensure ws2811_fini is called before the program quits.
 		ws.ws2811_fini(leds)
 		# Example of calling delete function to clean up structure memory.  Isn't
 		# strictly necessary at the end of the program execution here, but is good practice.
 		ws.delete_ws2811_t(leds)
-		return
 
