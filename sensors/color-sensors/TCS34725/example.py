@@ -8,8 +8,9 @@ try:
 	sense_colors()
 except KeyboardInterrupt:
 	sense_colors()
-except:
+except e:
 	print('caught exception')
+	print(e)
 	print('')
 finally:
 	# Enable interrupts and put the chip back to low power sleep/disabled.
@@ -19,10 +20,9 @@ finally:
 
 def sense_colors():
 	# Enable interrupts and put the chip back to low power sleep/disabled.
-	tcs.set_interrupt(True)
 	tcs.disable()
 
-	data 	= raw_input('Would you like to sense color?')
+	raw_input('Would you like to sense color?')
 	tcs.enable()
 	while True:
 		# You can also override the I2C device address and/or bus with parameters:
