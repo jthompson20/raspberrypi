@@ -36,7 +36,7 @@ class WS281X(object):
 
 		# Initialize all channels to off
 		for channum in range(2):
-		    channel = ws.ws2811_channel_get(leds, channum)
+		    channel = ws.ws2811_channel_get(self.leds, channum)
 		    ws.ws2811_channel_t_count_set(channel, 0)
 		    ws.ws2811_channel_t_gpionum_set(channel, 0)
 		    ws.ws2811_channel_t_invert_set(channel, 0)
