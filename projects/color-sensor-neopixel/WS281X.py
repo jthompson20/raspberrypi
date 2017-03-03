@@ -1,5 +1,6 @@
 import time
 import _rpi_ws281x as ws
+import ctypes
 
 # LED configuration.
 LED_CHANNEL    = 0
@@ -72,7 +73,7 @@ class WS281X(object):
 		print ""
 		for i in range(LED_COUNT):
 			# Set the LED color buffer value.
-			ws.ws2811_led_set(self.channel, i, newcolor)
+			ws.ws2811_led_set(self.channel, i, ctypes.c_uint32(self.color(r,g,b,c)).value)
 
 		# Send the LED color data to the hardware.
 		resp = ws.ws2811_render(self.leds)
