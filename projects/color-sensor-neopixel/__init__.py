@@ -13,7 +13,7 @@ try:
 		sensor.set_interrupt(False)
 
 		# Read the R, G, B, C color data.
-		r, g, b, c = tcs.get_raw_data()
+		r, g, b, c = sensor.get_raw_data()
 
 		# Calculate lux with another utility function.
 		lux = TCS34725.calculate_lux(r, g, b)
