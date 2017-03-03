@@ -42,7 +42,7 @@ GPIO.setmode(GPIO.BOARD)
 
 # make all pins output type
 for pin in pins:
-	GPIO.setup(pin,GPIO.OUT)
+	GPIO.setup(pins[pin],GPIO.OUT)
 
 # method to switch to a specific color
 def led(color='red'):
