@@ -6,6 +6,7 @@ tcs 	= TCS34725.TCS34725()
 
 def sense_colors():
 	# Enable interrupts and put the chip back to low power sleep/disabled.
+	tcs.set_interrupt(True)
 	tcs.disable()
 
 	raw_input('Would you like to sense color?')
