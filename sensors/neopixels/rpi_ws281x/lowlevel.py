@@ -34,6 +34,14 @@ DOT_COLORS = [  0x200000,   # red
 				0x100010,   # purple
 				0x200010 ]  # pink
 
+def Color(red, green, blue, white = 0):
+	"""Convert the provided red, green, blue color to a 24-bit color value.
+	Each color component should be a value 0-255 where 0 is the lowest intensity
+	and 255 is the highest intensity.
+	"""
+	return (white << 24) | (red << 16)| (green << 8) | blue
+
+
 
 # Create a ws2811_t structure from the LED configuration.
 # Note that this structure will be created on the heap so you need to be careful
@@ -73,7 +81,7 @@ try:
 		for i in range(LED_COUNT):
 			# Pick a color based on LED position and an offset for animation.
 			color = DOT_COLORS[(i + offset) % len(DOT_COLORS)]
-			print color
+			color = Color(15,150,15,150)
 			# Set the LED color buffer value.
 			ws.ws2811_led_set(channel, i, color)
 
