@@ -9,9 +9,8 @@ try:
 except KeyboardInterrupt:
 	#sense_colors()
 	pass
-except:
-	print('caught exception')
-	print('')
+except Exception as e: 
+	print str(e)
 finally:
 	# Enable interrupts and put the chip back to low power sleep/disabled.
 	tcs.set_interrupt(True)
