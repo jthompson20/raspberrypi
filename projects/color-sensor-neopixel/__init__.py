@@ -18,6 +18,7 @@ try:
 		print r
 		print g
 		print b
+		print c
 
 		# Calculate lux with another utility function.
 		lux = TCS34725.calculate_lux(r, g, b)
