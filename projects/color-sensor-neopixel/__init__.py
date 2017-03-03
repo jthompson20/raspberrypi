@@ -27,10 +27,10 @@ try:
 		print ''
 
 		# if lux if within range, update RGB colors
-		#if lux > 50 and lux < 100:
-		# update RGB
-		print 'updating rgb...'
-		rgb.update(r,g,b,c)
+		if lux > 50:
+			# update RGB
+			print 'updating rgb...'
+			rgb.update(r,g,b,c)
 
 		time.sleep(1)
 
