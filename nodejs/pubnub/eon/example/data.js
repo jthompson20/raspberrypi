@@ -18,4 +18,4 @@ function publish() {
         message   : message,
     });
 }
-setInterval(publish,3*1000); //every three seconds
+setInterval(publish,500); //every three seconds
