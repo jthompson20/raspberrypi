@@ -1,48 +1,56 @@
-import time
 import smbus
-import TCS34725	# color sensor
-import WS281X	# neopixel
+import time
+import WS281X
 
-# initialize sensor
-sensor 	= TCS34725.TCS34725()
+bus 	= smbus.SMBus(1)
 rgb 	= WS281X.WS281X(18)
 
-try:
-	while True:
-		# disbale interrupts
-		sensor.set_interrupt(False)
+# I2C address 0x29
+# Register 0x12 has device ver. 
+# Register addresses must be OR'ed with 0x80
+bus.write_byte(0x29,0x80|0x12)
+ver = bus.read_byte(0x29)
 
-		# Read the R, G, B, C color data.
-		r, g, b, c = sensor.get_raw_data()
+# version # should be 0x44
+if ver == 0x44:
+	print "Device found\n"
+	bus.write_byte(0x29, 0x80|0x00) # 0x00 = ENABLE register
+	bus.write_byte(0x29, 0x01|0x02) # 0x01 = Power on, 0x02 RGB sensors enabled
+	bus.write_byte(0x29, 0x80|0x14) # Reading results start register 14, LSB then MSB
 
-		print r
-		print g
-		print b
-		print c
+	try:
+		while True:
+			# read data
+			data = bus.read_i2c_block_data(0x29, 0)
 
-		# Calculate lux with another utility function.
-		lux = TCS34725.calculate_lux(r, g, b)
+			# grab RGB & Clear values
+			clear = clear = data[1] << 8 | data[0]
+			red = data[3] << 8 | data[2]
+			green = data[5] << 8 | data[4]
+			blue = data[7] << 8 | data[6]
 
-		print lux
-		print ''
+			# print results
+			crgb = "C: %s, R: %s, G: %s, B: %s\n" % (clear, red, green, blue)
+			print crgb
 
-		# if lux if within range, update RGB colors
-		#if lux > 10:
-		# update RGB
-		print 'updating rgb...'
-		rgb.update(r,g,b,c)
+			# update RGB
+			rgb.update(red,green,blue,clear)
+			time.sleep(.25)
+	except KeyboardInterrupt:
+		pass
+	except Exception as e:
+		print(e)
+	finally:
+		# turn rgb OFF
+		rgb.update(0,0,0,0)
+		rgb.disable()
 
-		#time.sleep(1)
 
-except KeyboardInterrupt:
-	pass
-except Exception as e:
-	print(e)
-finally:
-	# turn rgb OFF
-	rgb.update(0,0,0,0)
-	# Enable interrupts and put the chip back to low power sleep/disabled for color sensor.
-	sensor.set_interrupt(True)
-	sensor.disable()
-	# disable the RGB
-	rgb.disable()
+else: 
+	print "Device not found\n"
+
+
+
+
+
+
