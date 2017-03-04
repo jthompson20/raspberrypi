@@ -53,7 +53,7 @@ class TSL2561:
         """Reads a word from the I2C device"""
         try:
             wordval = self.i2c.readU16(reg)
-            newval = self.i2c.reverseByteOrder(wordval)
+            newval = I2C.reverseByteOrder(wordval)
             if (self.debug):
                 print("I2C: Device 0x%02X returned 0x%04X from reg 0x%02X" % (self.address, wordval & 0xFFFF, reg))
             return newval
