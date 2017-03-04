@@ -10,7 +10,7 @@ import time
 # needed in order to import Adafruit library a few directories back
 sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-4])))
 
-import Adafruit.GPIO.I2C as Adafruit_I2C
+import Adafruit.GPIO.I2C as I2C
 
 ### Written for Python 2 <-!!!
 ### Big thanks to bryand, who wrote the code that I borrowed heavily from/was inspired by
@@ -26,7 +26,7 @@ class TSL2561:
     i2c = None
 
     def __init__(self, address=0x39, debug=0, pause=0.8):
-        self.i2c = Adafruit_I2C(address)
+        self.i2c = I2C.get_i2c_device(address,1)
         self.address = address
         self.pause = pause
         self.debug = debug
