@@ -286,7 +286,7 @@ info = pubnub.publish({
 print('info')
 print(info)
 print('')
-'''
+
 # ---------
 # SUBSCRIBE
 # ---------
@@ -299,7 +299,7 @@ pubnub.subscribe({
     'channel'  : 'hello_world',
     'callback' : receive 
 })
-
+'''
 # ------------------
 ## Channel Analytics
 # ------------------
