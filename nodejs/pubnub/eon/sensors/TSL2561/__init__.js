@@ -37,7 +37,7 @@ sens.on('newSensorValues', function(allData) {
 });
 
 
-while (true){
+setTimeout(function(){
 async.series([
 
         function(cB) {
@@ -203,4 +203,4 @@ async.series([
         console.log(err);
         console.log('finished');
     });
-}
+},1000);
