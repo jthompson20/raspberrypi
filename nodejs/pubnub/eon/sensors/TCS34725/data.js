@@ -47,9 +47,11 @@ rgb.on('ready', function() {
       data.clear 	= colors.clear;
 
       send_to_pubnub(data);
+      console.log(data);
 
     });
 
+    /*
     // get color temperature values in degrees Kelvin
     rgb.calculateColorTemperature(function(err, temp) {
       if (err) throw err;
@@ -74,7 +76,7 @@ rgb.on('ready', function() {
       send_to_pubnub(data);
 
     });
-
+    */
     
   }, 1000);
 
