@@ -276,6 +276,7 @@ pubnub = Pubnub()
 # PUBLISH
 # -------
 # Send Message
+'''
 info = pubnub.publish({
     'channel' : 'hello_world',
     'message' : {
@@ -285,7 +286,7 @@ info = pubnub.publish({
 print('info')
 print(info)
 print('')
-
+'''
 # ---------
 # SUBSCRIBE
 # ---------
