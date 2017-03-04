@@ -21,7 +21,7 @@
 /* jslint node: true */
 "use strict";
 
-var TSL2561 = require('./tsl2561');
+var TSL2561 = require('./TSL2561');
 var async = require('async');
 
 var sens = new TSL2561();
