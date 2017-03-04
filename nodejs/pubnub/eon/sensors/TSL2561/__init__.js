@@ -36,6 +36,7 @@ sens.on('newSensorValues', function(allData) {
     console.log('LUX     : ' + allData.sensValues.devData.light.value);
 });
 
+/*
 async.series([
 
         function(cB) {
@@ -201,3 +202,4 @@ async.series([
         console.log(err);
         console.log('finished');
     });
+    */
