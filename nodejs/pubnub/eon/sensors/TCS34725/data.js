@@ -26,8 +26,8 @@ rgb.on('ready', function() {
   		'green': 	0,
   		'blue': 	0,
   		'clear': 	0,
-  		'temp': 	0,
-  		'lux': 		0
+  		//'temp': 	0,
+  		//'lux': 		0
   	};
 
   	// get raw RGB data
