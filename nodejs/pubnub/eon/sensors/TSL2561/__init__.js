@@ -37,8 +37,8 @@ sens.on('newSensorValues', function(allData) {
 });
 
 
-setTimeout(function(){
-async.series([
+
+async.forever([
 
         function(cB) {
             sens.init(function(err, val) {
@@ -203,4 +203,3 @@ async.series([
         console.log(err);
         console.log('finished');
     });
-},1000);
