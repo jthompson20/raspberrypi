@@ -36,7 +36,21 @@ sens.on('newSensorValues', function(allData) {
     console.log('LUX     : ' + allData.sensValues.devData.light.value);
 });
 
-async.timeSeries([
+// initialize sensor
+sens.init(function(err, val) {
+    console.log('sensor init completed');
+    cB(null, 'sensor init');
+});
+
+// get LUX
+setTimeout(function() {
+    sens.getLux(function(err, val) {
+        console.log('>>: ' + val + ' lux');
+    });
+}, 1000);
+
+/*
+async.series([
 
         function(cB) {
             sens.init(function(err, val) {
@@ -201,3 +215,4 @@ async.timeSeries([
         console.log(err);
         console.log('finished');
     });
+    */
