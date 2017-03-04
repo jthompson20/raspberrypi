@@ -111,7 +111,8 @@ class TSL2561:
 
 if __name__ == "__main__":
     tsl=TSL2561()
-    print tsl.readLux()
+    while True:
+        print tsl.readLux()
 #print "LUX HIGH GAIN ", tsl.readLux(16)
 #print "LUX LOW GAIN ", tsl.readLux(1)
 #print "LUX AUTO GAIN ", tsl.readLux()
