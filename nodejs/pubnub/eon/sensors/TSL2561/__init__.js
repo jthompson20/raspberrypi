@@ -42,11 +42,13 @@ sens.init(function(err, val) {
 });
 
 // get LUX
-setTimeout(function() {
-    sens.getLux(function(err, val) {
-        console.log('>>: ' + val + ' lux');
-    });
-}, 1000);
+while (true){
+	setTimeout(function() {
+	    sens.getLux(function(err, val) {
+	        console.log('>>: ' + val + ' lux');
+	    });
+	}, 1000);
+}
 
 /*
 async.series([
