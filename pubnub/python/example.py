@@ -1,3 +1,5 @@
+import Pubnub
+
 ## ---------------------------------------------------
 ##
 ## YOU MUST HAVE A PUBNUB ACCOUNT TO USE THE API.
