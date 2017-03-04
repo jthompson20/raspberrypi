@@ -39,7 +39,6 @@ sens.on('newSensorValues', function(allData) {
 // initialize sensor
 sens.init(function(err, val) {
     console.log('sensor init completed');
-    cB(null, 'sensor init');
 });
 
 // get LUX
