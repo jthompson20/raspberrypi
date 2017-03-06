@@ -34,11 +34,21 @@ sens.on('newSensorValues', function(allData) {
     console.log('FULL    : ' + full);
     console.log('VISIBLE : ' + (full - ir));
     console.log('LUX     : ' + allData.sensValues.devData.light.value);
+
+    data    = {
+        'ir':       ir,
+        'full':     full,
+        'visible':  (full-ir),
+        'lux':      allData.sensValues.devData.light.value
+    };
+
+    // send data to pubnub
+    send_to_pubnub(data);
 });
 
 
 
-async.forever([
+async.series([
 
         function(cB) {
             sens.init(function(err, val) {
@@ -203,3 +213,12 @@ async.forever([
         console.log(err);
         console.log('finished');
     });
+
+function send_to_pubnub(data){
+    // push the data to pubnub
+    //var message = { eon: eon };
+    pubnub.publish({
+        channel   : 'eon-sensor-tsl2561',
+        message   : { eon: data },
+    });
+}
