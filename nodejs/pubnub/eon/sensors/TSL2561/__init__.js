@@ -35,7 +35,7 @@ sens.on('newSensorValues', function(allData) {
     console.log('VISIBLE : ' + (full - ir));
     console.log('LUX     : ' + allData.sensValues.devData.light.value);
 
-    data    = {
+    var data    = {
         'ir':       ir,
         'full':     full,
         'visible':  (full-ir),
