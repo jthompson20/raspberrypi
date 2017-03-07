@@ -35,6 +35,12 @@ try:
 		counter 	+= 1
 		msg 		= "counter: {}".format(counter)
 		msg 		= {'var': 'val','vars': 'vals'}
+
+		# convert json to bytes
+		msg 		= msg.encode()
+
+		print msg
+
 		message 	= list(msg)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
