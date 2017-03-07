@@ -1,3 +1,8 @@
+# attempt to fix for error: ImportError: No module named lib_nrf24
+
+import sys
+sys.path.append("/usr/lib/python2.7/dist-packages")
+
 # http://invent.module143.com/daskal_tutorial/rpi-3-tutorial-13-wireless-pi-to-pi-python-communication-with-nrf24l01/
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24 
