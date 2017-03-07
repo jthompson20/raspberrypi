@@ -44,7 +44,7 @@ try:
 		binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
 
 		print binary
-
+		binary  	= "Hi Mom"
 		message 	= list(binary)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
