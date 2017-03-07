@@ -41,7 +41,7 @@ try:
 		msg 		= json.dumps(msg)
 
 		# convert JSON to binary
-		binary 		= ' '.join(format(ord(letter), 'b') for letter in str)
+		binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
 
 		print binary
 
