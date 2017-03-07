@@ -35,7 +35,7 @@ try:
 	while True:
 		counter 	+= 1
 		msg 		= "counter: {}".format(counter)
-		msg 		= {'var': 'val','vars': 'vals'}
+		msg 		= {'test': 'es','tester': 'ing'}
 
 		# convert dict to JSON (string)
 		msg 		= json.dumps(msg)
