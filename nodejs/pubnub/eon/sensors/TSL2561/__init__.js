@@ -25,6 +25,13 @@ var PubNub  = require('pubnub');
 var TSL2561 = require('./TSL2561');
 var async   = require('async');
 
+// init pubnub
+var pubnub = new PubNub({
+    publishKey   : "pub-c-561a7378-fa06-4c50-a331-5c0056d0163c",
+    subscribeKey : "sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe"
+});
+
+
 var sens    = new TSL2561();
 
 sens.on('newSensorValues', function(allData) {
