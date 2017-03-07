@@ -46,8 +46,7 @@ try:
 			if (n >= 32 and n <= 126):
 				string += chr(n)
 
-		data 	= json.loads(string)
-		print data
+		print string
 
 		radio.writeAckPayload(1,ackPL,len(ackPL))
 		print "Loaded payload reply of {}".format(ackPL)
