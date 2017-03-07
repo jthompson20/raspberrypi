@@ -35,7 +35,7 @@ try:
 	while True:
 		counter 	+= 1
 		msg 		= "counter: {}".format(counter)
-		msg 		= {'module': 'lighsensor','value': msg}
+		msg 		= {'module': 'lighsensor','value': 'counter'}
 
 		# convert dict to JSON (string)
 		msg 		= json.dumps(msg)
