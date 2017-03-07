@@ -21,10 +21,11 @@
 /* jslint node: true */
 "use strict";
 
+var PubNub  = require('pubnub');
 var TSL2561 = require('./TSL2561');
-var async = require('async');
+var async   = require('async');
 
-var sens = new TSL2561();
+var sens    = new TSL2561();
 
 sens.on('newSensorValues', function(allData) {
     console.log('received event "newSensorValues" - calculating ...');
