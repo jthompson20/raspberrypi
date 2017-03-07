@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24 
 import time
 import spidev
+import json
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -40,12 +41,22 @@ try:
 		print "Translating the receivedMessage into unicode characters"
 		string 	= ""
 		for n in receivedMessage:
+
 			# decode into standard unicode set
 			if (n >= 32 and n <= 126):
 				string += chr(n)
-		print string
+
+			# convert to dict
+			#jsn  	= ''.join(chr(int(x, 2)) for x in n.split())
+    		#data 	= json.loads(jsn)
+
+    	data 	= json.loads(string)
+
+		#print string
+		print data
 		radio.writeAckPayload(1,ackPL,len(ackPL))
 		print "Loaded payload reply of {}".format(ackPL)
+
 except KeyboardInterrupt:
 	print 'keyboard interruption'
 except:

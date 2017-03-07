@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24 
 import time
 import spidev
+import json
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -30,8 +31,22 @@ radio.printDetails()
 # radio.startListening()
 # message = list(input("Enter a message to send: "))
 try:
+	counter = 0
 	while True:
-		message 	= list("Hello World is awesome")
+		counter 	+= 1
+		msg 		= "counter: {}".format(counter)
+		msg 		= {'test': 'es','tester': 'ing'}
+
+		# convert dict to JSON (string)
+		msg 		= json.dumps(msg)
+
+		# convert JSON to binary
+		#binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
+
+		#print binary
+		#binary  	= "Hello World: {}".format(counter)
+		binary 		= str(msg)
+		message 	= list(binary)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
 
@@ -46,7 +61,8 @@ try:
 		time.sleep(1)
 except KeyboardInterrupt:
 	print 'keyboard interruption'
-except:
+except Exception as e:
 	print 'caught exception'
+	print e
 finally:
 	GPIO.cleanup()
