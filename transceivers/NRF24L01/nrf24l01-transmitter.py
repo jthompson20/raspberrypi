@@ -32,7 +32,7 @@ radio.printDetails()
 try:
 	counter = 0
 	while True:
-		counter++
+		counter 	+= 1
 		message 	= list(counter)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
