@@ -47,13 +47,17 @@ try:
 				string += chr(n)
 
 		print string
+		data 	= json.loads(string)
 
+		print data
+		print data['lux']
+		
 		radio.writeAckPayload(1,ackPL,len(ackPL))
 		print "Loaded payload reply of {}".format(ackPL)
 
 except KeyboardInterrupt:
 	print 'keyboard interruption'
-except:
+except Exception as e:
 	print 'caught exception'
 finally:
 	GPIO.cleanup()
