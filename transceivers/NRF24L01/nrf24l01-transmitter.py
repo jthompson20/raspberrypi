@@ -41,10 +41,11 @@ try:
 		msg 		= json.dumps(msg)
 
 		# convert JSON to binary
-		binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
+		#binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
 
-		print binary
-		binary  	= "Hello World: {}".format(counter)
+		#print binary
+		#binary  	= "Hello World: {}".format(counter)
+		binary 		= str(msg)
 		message 	= list(binary)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
