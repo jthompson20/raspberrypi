@@ -44,10 +44,10 @@ try:
 		#binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
 
 		#print binary
-		#binary  	= "Hello World: {}".format(counter)
+		binary  	= "Hello World: {}".format(counter)
 
 		# convert JSON into string
-		binary 		= str(msg)
+		#binary 		= str(msg)
 
 		# must be of type list or int 
 		message 	= list(binary)
