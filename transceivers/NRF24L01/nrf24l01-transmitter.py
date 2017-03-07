@@ -34,6 +34,7 @@ try:
 	while True:
 		counter 	+= 1
 		msg 		= "counter: {}".format(counter)
+		msg 		= {'var': 'val','vars': 'vals'}
 		message 	= list(msg)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
