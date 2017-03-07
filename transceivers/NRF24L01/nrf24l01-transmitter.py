@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24 
 import time
 import spidev
+import json
 
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
@@ -36,12 +37,15 @@ try:
 		msg 		= "counter: {}".format(counter)
 		msg 		= {'var': 'val','vars': 'vals'}
 
-		# convert json to bytes
-		msg 		= msg.encode()
+		# convert dict to JSON (string)
+		msg 		= json.dumps(msg)
 
-		print msg
+		# convert JSON to binary
+		binary 		= ' '.join(format(ord(letter), 'b') for letter in str)
 
-		message 	= list(msg)
+		print binary
+
+		message 	= list(binary)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
 
