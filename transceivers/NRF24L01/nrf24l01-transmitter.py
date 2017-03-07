@@ -30,8 +30,10 @@ radio.printDetails()
 # radio.startListening()
 # message = list(input("Enter a message to send: "))
 try:
+	counter = 0
 	while True:
-		message 	= list("Hello World is awesome")
+		counter++
+		message 	= list(counter)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
 
