@@ -33,13 +33,13 @@ try:
 	while True:
 		message 	= list("Hello World is awesome")
 		radio.write(message)
-		print "We sent the message of {}".format(message))
+		print "We sent the message of {}".format(message)
 
 		# check if it returned ack payload
 		if radio.isAckPayloadAvailable():
 				returnedPL 	= []
 				radio.read(returnedPL,radio.getDynamicPayloadSize())
-				print "Our returned pauload was {}".format(returnedPL))
+				print "Our returned pauload was {}".format(returnedPL)
 		else:
 			print "No payload received"
 
