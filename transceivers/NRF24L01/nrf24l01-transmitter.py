@@ -33,7 +33,8 @@ try:
 	counter = 0
 	while True:
 		counter 	+= 1
-		message 	= list(counter)
+		msg 		= "counter: {}".format(counter)
+		message 	= list(msg)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
 
