@@ -35,7 +35,7 @@ try:
 	while True:
 		counter 	+= 1
 		msg 		= "counter: {}".format(counter)
-		msg 		= {'test': 'es','tester': 'ing'}
+		msg 		= {'module': 'ligh-sensor','value': counter}
 
 		# convert dict to JSON (string)
 		msg 		= json.dumps(msg)
@@ -45,7 +45,11 @@ try:
 
 		#print binary
 		#binary  	= "Hello World: {}".format(counter)
+
+		# convert JSON into string
 		binary 		= str(msg)
+
+		# must be of type list or int 
 		message 	= list(binary)
 		radio.write(message)
 		print "We sent the message of {}".format(message)
