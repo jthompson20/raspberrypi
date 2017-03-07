@@ -47,15 +47,15 @@ try:
 				string += chr(n)
 		
 			# convert to dict
-			jsn  	= ''.join(chr(int(x, 2)) for x in n.split())
-    		data 	= json.loads(jsn)
+			#jsn  	= ''.join(chr(int(x, 2)) for x in n.split())
+    		#data 	= json.loads(jsn)
 
 
 		print string
-		print data
+		#print data
 		radio.writeAckPayload(1,ackPL,len(ackPL))
 		print "Loaded payload reply of {}".format(ackPL)
-		
+
 except KeyboardInterrupt:
 	print 'keyboard interruption'
 except:
