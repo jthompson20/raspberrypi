@@ -46,14 +46,9 @@ try:
 			if (n >= 32 and n <= 126):
 				string += chr(n)
 
-			# convert to dict
-			#jsn  	= ''.join(chr(int(x, 2)) for x in n.split())
-    		#data 	= json.loads(jsn)
+			data 	= json.loads(string)
+			print data
 
-    	data 	= json.loads(string)
-
-		#print string
-		print data
 		radio.writeAckPayload(1,ackPL,len(ackPL))
 		print "Loaded payload reply of {}".format(ackPL)
 
