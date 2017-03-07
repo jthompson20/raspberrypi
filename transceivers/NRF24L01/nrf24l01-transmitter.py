@@ -57,7 +57,7 @@ try:
 		else:
 			print "No payload received"
 
-		time.sleep(10)
+		time.sleep(1)
 except KeyboardInterrupt:
 	print 'keyboard interruption'
 except Exception as e:
