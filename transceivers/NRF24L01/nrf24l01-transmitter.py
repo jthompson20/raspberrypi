@@ -56,7 +56,8 @@ try:
 		time.sleep(1)
 except KeyboardInterrupt:
 	print 'keyboard interruption'
-except:
+except Exception as e:
 	print 'caught exception'
+	print e
 finally:
 	GPIO.cleanup()
