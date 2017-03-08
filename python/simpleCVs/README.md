@@ -21,3 +21,10 @@ sudo aptitude install lsof
 I also had motion installed (as a bg service) which was causing the resource to be busy.  You can kill all of those processes:
 
 sudo killall -9 motion
+
+Real-Time Streaming Server
+
+https://www.linux-projects.org/uv4l/tutorials/rtsp-server/
+
+
+**If simplecv cam=Camera() doesn't work, be sure to chmod /dev/video0 and kill motion
