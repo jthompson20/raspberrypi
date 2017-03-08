@@ -14,7 +14,7 @@ try:
 		data 		= {
 			'sensor': 	'TSL2561',
 			'type': 	'light',
-			'lux': 		str(round(sensor.readLux(1))
+			'lux': 		str(round(sensor.readLux(1)))
 		}
 
 		# send data
