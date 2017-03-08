@@ -24,6 +24,7 @@ haarcascade = HaarCascade("face")
 while display.isNotDone():
     # Get image, flip it so it looks mirrored, scale to speed things up
     img = cam.getImage().flipHorizontal().scale(0.5)
+    print img.listHaarFeatures()
     # load in trained face file
     faces = img.findHaarFeatures(haarcascade)
     # If there were faces found do something
