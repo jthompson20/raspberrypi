@@ -29,7 +29,7 @@ class radio:
 		self.radio.openWritingPipe(self.pipes[1])
 		self.radio.printDetails()
 
-	def send(string):
+	def send(self,string):
 		self.radio.write(list(str(string)))
 		if radio.isAckPayloadAvailable():
 			payload 	= []
@@ -38,7 +38,7 @@ class radio:
 		else:
 			return {'success': True,'payload': 0}
 
-	def disable():
+	def disable(self):
 		self.radio.flush_rx()
 		self.radio.flush_tx()
 		self.radio.end()
