@@ -3,7 +3,7 @@ import os
 import math
 
 # needed in order to import Adafruit library a few directories back
-sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-4])))
+sys.path.append(sys.path.append('/'.join(os.getcwd().split('/')[:-3])))
 
 import Adafruit.GPIO.I2C as I2C
 
