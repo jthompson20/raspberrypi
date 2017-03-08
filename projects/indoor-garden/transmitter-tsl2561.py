@@ -27,7 +27,7 @@ try:
 		print message
 
 		# send data
-		response 	= transmitter.send(message)
+		response 	= transmitter.send(list(lux))
 
 		# show response
 		print response
