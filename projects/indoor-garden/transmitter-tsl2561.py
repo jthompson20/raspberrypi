@@ -20,11 +20,13 @@ try:
 			'lux': 		str(lux)
 		}
 
+		print data
+
 		# convert data
 		msg 	= json.dumps(data)
 		binary 	= str(msg)
 		message = list(binary)
-		print message
+		#print message
 
 		# send data
 		response 	= transmitter.send(list(str(lux)))
