@@ -15,7 +15,7 @@ cam = Camera()
 display = Display()
 
 # Load the new face image
-troll_face = Image('img/smiley-face.jpg', sample=True)
+troll_face = Image('troll_face.png', sample=True)
 
 # Haar Cascade face detection, only faces
 haarcascade = HaarCascade("face")
