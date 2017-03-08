@@ -33,6 +33,7 @@ class radio:
 		msg 	= json.dumps(data)
 		binary 	= str(msg)
 		message = list(binary)
+		print message
 		self.radio.write(message)
 		print "We sent the message of {}".format(message)
 		if self.radio.isAckPayloadAvailable():

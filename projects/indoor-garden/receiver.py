@@ -50,10 +50,11 @@ try:
 				string += chr(n)
 
 		print string
-		data 	= json.loads(string)
+		
+		#data 	= json.loads(string)
 
-		print data
-		print data['lux']
+		#print data
+		#print data['lux']
 		
 
 except KeyboardInterrupt:
