@@ -30,4 +30,4 @@ except Exception as e:
 	print 'caught exception'
 	print e
 finally:
-	transmitter.end()
+	transmitter.disable()
