@@ -1,6 +1,7 @@
 from transmitter import radio
 from TSL2561 import TSL2561
 import time
+import json
 
 # initialize libs
 transmitter 	= radio()
