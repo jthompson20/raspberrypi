@@ -1,7 +1,7 @@
-import Tkinter as Tk
+import Tkinter
 import time
 
-master 	= Tk()
+master 	= Tkinter.Tk()
 
 Label(master, text="First").grid(row=0)
 Label(master, text="Second").grid(row=1)
