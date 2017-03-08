@@ -17,7 +17,7 @@ while True:
 	time.sleep(5)    
 
 	# find blobs
-	img = img.findBlobs()  
+	img = img.findBlobs()
 	for blob in blobs:  
 	    blob.draw()  
 	img.show()  
