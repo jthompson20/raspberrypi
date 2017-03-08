@@ -1,72 +1,49 @@
-# http://invent.module143.com/daskal_tutorial/rpi-3-tutorial-13-wireless-pi-to-pi-python-communication-with-nrf24l01/
 import RPi.GPIO as GPIO
 from lib_nrf24 import NRF24 
 import time
 import spidev
 import json
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
+class radio:
+	def __init__(self):
+		GPIO.setwarnings(False)
+		GPIO.setmode(GPIO.BCM)
 
-pipes 	= [
-	[0xe7,0xe7,0xe7,0xe7,0xe7],
-	[0xc2,0xc2,0xc2,0xc2,0xc2]
-]
+		self.pipes 	= [
+			[0xe7,0xe7,0xe7,0xe7,0xe7],
+			[0xc2,0xc2,0xc2,0xc2,0xc2]
+		]
 
-radio 	= NRF24(GPIO,spidev.SpiDev())
-radio.begin(0,17)	# address/pin?
-radio.setPayloadSize(32)
-radio.setChannel(0x60)
+		self.radio 	= NRF24(GPIO,spidev.SpiDev())
+		self.radio.begin(0,17)	# address/pin?
+		self.radio.setPayloadSize(32)
+		self.radio.setChannel(0x60)
 
-radio.setDataRate(NRF24.BR_2MBPS)
-radio.setPALevel(NRF24.PA_MIN)
-radio.setAutoAck(True)
-radio.enableDynamicPayloads()
-radio.enableAckPayload()
+		self.radio.setDataRate(NRF24.BR_2MBPS)
+		self.radio.setPALevel(NRF24.PA_MIN)
+		self.radio.setAutoAck(True)
+		self.radio.enableDynamicPayloads()
+		self.radio.enableAckPayload()
 
-# radio.openReadingPipe(1,pipes[1])
-radio.openWritingPipe(pipes[1])
-radio.printDetails()
+		# radio.openReadingPipe(1,pipes[1])
+		self.radio.openWritingPipe(self.pipes[1])
+		self.radio.printDetails()
 
-# radio.startListening()
-# message = list(input("Enter a message to send: "))
-try:
-	counter = 0
-	while True:
-		counter 	+= 1
-		msg 		= "counter: {}".format(counter)
-		msg 		= {'sensor': 'light','lux': counter}
-
-		# convert dict to JSON (string)
-		msg 		= json.dumps(msg)
-
-		# convert JSON to binary
-		#binary 		= ' '.join(format(ord(letter), 'b') for letter in msg)
-
-		#print binary
-		#binary  	= "Hello World: {}".format(counter)
-
-		# convert JSON into string
-		binary 		= str(msg)
-
-		# must be of type list or int 
-		message 	= list(binary)
-		radio.write(message)
-		print "We sent the message of {}".format(message)
-
-		# check if it returned ack payload
+	def send(string):
+		self.radio.write(list(str(string)))
 		if radio.isAckPayloadAvailable():
-				returnedPL 	= []
-				radio.read(returnedPL,radio.getDynamicPayloadSize())
-				print "Our returned pauload was {}".format(returnedPL)
+			payload 	= []
+			self.radio.read(payload,self.radio.getDynamicPayloadSize())
+			return {'success': True,'payload': payload}
 		else:
-			print "No payload received"
+			return {'success': True,'payload': 0}
 
-		time.sleep(1)
-except KeyboardInterrupt:
-	print 'keyboard interruption'
-except Exception as e:
-	print 'caught exception'
-	print e
-finally:
-	GPIO.cleanup()
+	def disable():
+		self.radio.flush_rx()
+		self.radio.flush_tx()
+		self.radio.end()
+		GPIO.cleanup()
+
+
+
+
