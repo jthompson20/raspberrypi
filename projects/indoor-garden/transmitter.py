@@ -30,12 +30,8 @@ class radio:
 		self.radio.printDetails()
 
 	def send(self,data):
-		msg 	= json.dumps(data)
-		binary 	= str(msg)
-		message = list(binary)
-		print message
-		self.radio.write(message)
-		print "We sent the message of {}".format(message)
+		self.radio.write(data)
+		print "We sent the message of {}".format(data)
 		if self.radio.isAckPayloadAvailable():
 			payload 	= []
 			self.radio.read(payload,self.radio.getDynamicPayloadSize())

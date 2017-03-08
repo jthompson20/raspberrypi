@@ -1,6 +1,7 @@
 from transmitter import radio
 from TSL2561 import TSL2561
 import time
+import json
 
 # initialize libs
 transmitter 	= radio()
@@ -9,15 +10,24 @@ sensor 	 		= TSL2561()
 try:
 	while True:
 
+		# calc lux
+		lux 		= sensor.readLux(1)
+
 		# get data
 		data 		= {
 			'sensor': 	'TSL2561',
 			'type': 	'light',
-			'lux': 		sensor.readLux(1)
+			'lux': 		lux
 		}
 
+		# convert data
+		msg 	= json.dumps(data)
+		binary 	= str(msg)
+		message = list(binary)
+		print message
+
 		# send data
-		response 	= transmitter.send(data)
+		response 	= transmitter.send(message)
 
 		# show response
 		print response
