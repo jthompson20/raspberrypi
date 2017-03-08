@@ -14,7 +14,7 @@ try:
 		data 		= {
 			'sensor': 	'TSL2561',
 			'type': 	'light',
-			'lux': 		185019#str(round(sensor.readLux(1)))
+			'lux': 		'test' #str(round(sensor.readLux(1)))
 		}
 
 		# send data
