@@ -12,8 +12,9 @@ while not display.isDone():
 	# Look for a face
 	faces = img.findHaarFeatures('eye.xml')
 	if faces is not None:
-	# Draw a box around the face
-	faces.draw()
-	# Say how many faces were found
+		# Draw a box around the face
+		faces.draw()
+		# Say how many faces were found
+
 	print ‘%s faces detected” % len(faces)
 	img.save(display)
