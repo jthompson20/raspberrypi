@@ -12,9 +12,9 @@ cam.start();
 cam.capture(function (success) {
 	console.log('capturing..');
 	var yuyv 	= cam.toYUYV();
-	console.log(yuyv);
+	//console.log(yuyv);
 	var frame 	= cam.frameRaw();
-	console.log(frame);
-	//require("fs").createWriteStream("result.jpg").end(Buffer(frame));
+	//console.log(frame);
+	require("fs").createWriteStream("result.jpg").end(Buffer(frame));
 	cam.stop();
 });
