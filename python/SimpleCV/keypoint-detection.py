@@ -4,8 +4,8 @@ from SimpleCV import Image, Color, Display, Camera
 cam = Camera()
 # Loop to continuously get images
 while True:
-    # Get Image from camera
-    img = cam.getImage()
+	# Get Image from camera
+	img = cam.getImage()
 	# use a keypoint detector to find areas of interest
 	feats = img.findKeypoints()
 	# draw the list of keypoints
