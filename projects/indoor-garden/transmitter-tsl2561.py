@@ -17,7 +17,7 @@ try:
 		data 		= {
 			'sensor': 	'TSL2561',
 			'type': 	'light',
-			'lux': 		lux
+			'lux': 		1
 		}
 
 		# convert data
