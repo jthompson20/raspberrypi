@@ -16,5 +16,5 @@ while not display.isDone():
 		faces.draw()
 		# Say how many faces were found
 
-	print ‘%s faces detected” % len(faces)
+	print "%s faces detected" % len(faces)
 	img.save(display)
