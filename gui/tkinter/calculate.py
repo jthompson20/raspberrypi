@@ -1,5 +1,5 @@
-from tkinter import *
-from tkinter import ttk
+from Tkinter import *
+from Tkinter import ttk
 
 def calculate(*args):
     try:
@@ -8,7 +8,7 @@ def calculate(*args):
     except ValueError:
         pass
     
-root = Tk()
+root = Tkinter.Tk()
 root.title("Feet to Meters")
 
 mainframe = ttk.Frame(root, padding="3 3 12 12")
