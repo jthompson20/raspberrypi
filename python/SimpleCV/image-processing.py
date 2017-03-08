@@ -1,4 +1,6 @@
 from SimpleCV import Camera
+import time
+
 # Initialize the camera
 cam = Camera()
 # Loop to continuously get images
