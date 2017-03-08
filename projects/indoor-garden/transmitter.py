@@ -29,11 +29,9 @@ class radio:
 		self.radio.openWritingPipe(self.pipes[1])
 		self.radio.printDetails()
 
-	def send(self,string):
-		print '---'
-		print string
-		print '---'
-		self.radio.write(list(string))
+	def send(self,data):
+
+		self.radio.write(list(str(json.dumps(data))))
 		if self.radio.isAckPayloadAvailable():
 			payload 	= []
 			self.radio.read(payload,self.radio.getDynamicPayloadSize())
