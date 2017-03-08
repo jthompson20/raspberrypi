@@ -30,6 +30,9 @@ class radio:
 		self.radio.printDetails()
 
 	def send(self,string):
+		print '---'
+		print string
+		print '---'
 		self.radio.write(list(string))
 		if self.radio.isAckPayloadAvailable():
 			payload 	= []
