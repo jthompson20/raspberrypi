@@ -18,7 +18,7 @@ display = Display()
 troll_face = Image('troll_face.png', sample=True)
 
 # Haar Cascade face detection, only faces
-haarcascade = HaarCascade("face4.xml")
+haarcascade = HaarCascade("eye.xml")
 
 # Loop forever
 while display.isNotDone():
