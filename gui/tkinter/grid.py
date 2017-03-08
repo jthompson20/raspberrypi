@@ -1,4 +1,4 @@
-from tkinter import *
+import Tkinter as Tk
 import time
 
 master 	= Tk()
