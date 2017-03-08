@@ -11,7 +11,7 @@ try:
 	while True:
 
 		# calc lux
-		lux 		= sensor.readLux(16)
+		lux 		= sensor.readLux()
 
 		# get data
 		data 		= {
