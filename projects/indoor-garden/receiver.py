@@ -60,6 +60,7 @@ except KeyboardInterrupt:
 	print 'keyboard interruption'
 except Exception as e:
 	print 'caught exception'
+	print e
 finally:
 	GPIO.cleanup()
 
