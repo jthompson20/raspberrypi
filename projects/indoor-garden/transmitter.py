@@ -30,7 +30,7 @@ class radio:
 		self.radio.printDetails()
 
 	def send(self,string):
-		self.radio.write(list(str(string)))
+		self.radio.write(list(string))
 		if self.radio.isAckPayloadAvailable():
 			payload 	= []
 			self.radio.read(payload,self.radio.getDynamicPayloadSize())
