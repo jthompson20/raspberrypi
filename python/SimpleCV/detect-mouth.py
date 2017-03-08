@@ -10,11 +10,11 @@ while not display.isDone():
 	# Get image, flip it so it looks mirrored, scale to speed things up
 	img = cam.getImage().flipHorizontal().scale(0.5)
 	# Look for a face
-	faces = img.findHaarFeatures('eye.xml')
+	faces = img.findHaarFeatures('mouth.xml')
 	if faces is not None:
 		# Draw a box around the face
 		faces.draw()
 		# Say how many faces were found
 
-	print "%s eyes detected" % len(faces)
+	print "%s mouth detected" % len(faces)
 	img.save(display)
