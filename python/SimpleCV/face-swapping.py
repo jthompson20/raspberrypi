@@ -18,13 +18,13 @@ display = Display()
 troll_face = Image('troll_face.png', sample=True)
 
 # Haar Cascade face detection, only faces
-haarcascade = HaarCascade("face")
+haarcascade = HaarCascade("face4")
 
 # Loop forever
 while display.isNotDone():
     # Get image, flip it so it looks mirrored, scale to speed things up
     img = cam.getImage().flipHorizontal().scale(0.5)
-    print img.listHaarFeatures()
+    #print img.listHaarFeatures()
     # load in trained face file
     faces = img.findHaarFeatures(haarcascade)
     # If there were faces found do something
