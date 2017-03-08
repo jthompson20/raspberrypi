@@ -18,7 +18,7 @@ try:
 		}
 
 		# send data
-		response 	= transmitter.send(json.dumps(data))
+		response 	= transmitter.send(str(json.dumps(data)))
 
 		# show response
 		print response
