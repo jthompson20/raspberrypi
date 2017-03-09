@@ -11,7 +11,7 @@ if (cam.configGet().formatName !== "MJPG") {
 cam.start();
 cam.capture(function (success) {
 	console.log('capturing..');
-	var yuyv 	= cam.toYUYV();
+	//var yuyv 	= cam.toYUYV();
 	//console.log(yuyv);
 	var frame 	= cam.frameRaw();
 	//console.log(frame);
