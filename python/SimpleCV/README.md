@@ -28,3 +28,8 @@ https://www.linux-projects.org/uv4l/tutorials/rtsp-server/
 
 
 **If simplecv cam=Camera() doesn't work, be sure to chmod /dev/video0 and kill motion
+
+
+Machine Learning:
+
+pip install scikit-learn
