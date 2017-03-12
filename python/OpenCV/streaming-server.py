@@ -34,5 +34,5 @@ while True:
     ###
 
     frame=pickle.loads(frame_data)
-    print frame
+    #print frame
     cv2.imshow('frame',frame)
