@@ -1,0 +1,1 @@
+creating a photo booth using a webcam and a push button

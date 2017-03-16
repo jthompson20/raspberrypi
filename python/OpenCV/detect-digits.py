@@ -1,3 +1,4 @@
+# http://www.pyimagesearch.com/2014/09/22/getting-started-deep-learning-python/
 # import the necessary packages
 from imutils.perspective import four_point_transform
 from imutils import contours

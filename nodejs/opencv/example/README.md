@@ -1,0 +1,1 @@
+https://github.com/drejkim/face-detection-node-opencv
