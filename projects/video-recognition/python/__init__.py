@@ -6,7 +6,7 @@ import imutils
 import cv2
 import sys
 
-WRITE_TO_DISK 	= True
+WRITE_TO_DISK 	= False
 
 cascPath 	= '/Applications/XAMPP/htdocs/raspberrypi-travis/python/OpenCV/haar/face.xml' #sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
