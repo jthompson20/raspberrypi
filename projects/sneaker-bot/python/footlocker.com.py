@@ -11,7 +11,6 @@ PROXIES 	= {
 	'https': 	""
 }
 
-
 # our main method to 
 def shoebot(model,sku,size,qty):
 	# init vars
@@ -20,26 +19,20 @@ def shoebot(model,sku,size,qty):
 	url 		= product(model,sku)
 	# check if product in stock
 	while not purchased:
-		try:
-			if stocked(url):
-				print('we can purchase - item is stocked')
-				print('purchasing qty: %s' % qty)
-				print('purchasing size: %s' % size)
+		if stocked(url):
+			print('we can purchase - item is stocked')
+			print('purchasing qty: %s' % qty)
+			print('purchasing size: %s' % size)
 
-				for i in qty:
-					print('purchasing #{}'.format(i))
-				
-				# after successful purchase(s), close thread
-				purchased 	= True
-				print('purchase complete')
-			else:
-				print('we can not purchase - item is not stocked')
-		except KeyboardInterrupt:
-			print('keyboard interrupt')
-		except:
-			pass
-		finally:
-			print('done')
+			for i in range(qty):
+				print('purchasing #{}'.format(i+1))
+			
+			# after successful purchase(s), close thread
+			purchased 	= True
+			print('purchase complete')
+		else:
+			print('we can not purchase - item is not stocked')
+
 
 # method to grab the product URL
 def product(model,sku):
@@ -60,12 +53,17 @@ def checkout():
 model 	= input('Enter Model #: ')
 sku 	= input('Enter SKU: ')
 size 	= input('Enter Shoe Size: (e.g. 11.0, 13.5, etc..) ')
-qty 	= input('Enter Quantity: ')
+qty 	= int(input('Enter Quantity: '))
 
 # array of sizes
 sizes 	= [size]
 
-shoebot(model,sku,size,qty)
+try:
+	shoebot(model,sku,size,qty)
+except KeyboardInterrupt:
+	print('keyboard interrupt')
+finally:
+	print('done')
 
 '''
 # setup threads
