@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  merchant: MyString
+  merchant_id: MyString
+  cardtype: MyString
+  lastfour: MyString
+  active: 1
+  default: 1
+
+two:
+  user_id: 1
+  merchant: MyString
+  merchant_id: MyString
+  cardtype: MyString
+  lastfour: MyString
+  active: 1
+  default: 1

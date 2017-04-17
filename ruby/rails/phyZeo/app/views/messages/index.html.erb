@@ -1,0 +1,86 @@
+<!-- Chat Page -->
+<script>
+var phyZeo 	= {
+	"id": 		<%= session[:user_id] %>,
+	"admin": 	<%= session[:admin] %>,
+	"username": "<%= session[:username] %>",
+	"first": 	"<%= session[:firstname] %>",
+	"last": 	"<%= session[:lastname] %>",
+
+	<% if session[:admin] == 1 %>
+
+		"provider": 	{
+			"id": 		<%= session[:user_id] %>,
+			"admin": 	<%= session[:admin] %>,
+			"username": "<%= session[:username] %>",
+			"first": 	"<%= session[:firstname] %>",
+			"last": 	"<%= session[:lastname] %>"
+		},
+		"patient": 		{
+			"id":7,
+			"admin":0,
+			"username":"thomas-patient",
+			"first":"Thomas",
+			"last":"Rowley"
+		}
+
+	<% else %>
+
+		"provider": 	{
+			"id":6,
+			"admin":1,
+			"username":"matt-provider",
+			"first":"John",
+			"last":"Thompson"
+		},
+		"patient": 		{
+			"id": 		<%= session[:user_id] %>,
+			"admin": 	<%= session[:admin] %>,
+			"username": "<%= session[:username] %>",
+			"first": 	"<%= session[:firstname] %>",
+			"last": 	"<%= session[:lastname] %>"
+		}
+
+	<% end %>
+};
+</script>
+<div data-role="page" id="chatPage" data-theme="c" class="type-interior">
+
+
+	<% if session[:admin] == 1 %>	
+		<h3>Your Patients</h3>
+		<ul>	
+			<li class="patient" data-id="1" data-first="firster" data-last="laster" data-username="username">Firster Laster</li>
+			<% 
+			patients = patients()
+			patients.each do |patient| %>
+				
+				<li class="patient" data-id="<%=patient.id%>" data-first="<%= patient.first %>" data-last="<%= patient.last %>" data-username="<%= patient.username %>"><%= patient.first %> <%= patient.last %></li>
+			
+			<%	
+			end
+			%>
+		</ul>
+	<% 
+	end
+	%>
+
+	<div data-role="content">
+		<div data-role="header" data-position="fixed" data-tap-toggle="false">
+		  <h2>Messenger</h2>
+		</div><!-- /header -->
+
+		<div data-role="content">
+		  <ul data-role="listview" id="messageList">
+		  </ul>
+		</div>
+
+		<div data-role="footer" data-theme="c">
+		  <textarea id="messageContent"></textarea>
+		    <div class="ui-grid-a">
+		      <div class="ui-block-a"><button id="sendMessageButton" data-role="button">Send Message</button></div>
+		    </div>
+		</div>
+	</div><!-- /content -->
+
+</div><!-- /page -->

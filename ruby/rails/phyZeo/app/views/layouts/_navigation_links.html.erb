@@ -1,0 +1,18 @@
+<%# add navigation links to this file %>
+<li class='nav-item active'><%= link_to 'Home', root_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Documents', documents_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Messages', messages_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Schedule', events_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to 'Telehealth', connecting_path, class: 'nav-link' %></li>
+<li class='nav-item'><%= link_to "Log out", logout_path, method: :delete, class: 'nav-link' %></li>
+<!--
+<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+	<div class="dropdown-menu" aria-labelledby="dropdown01">
+		<%= link_to 'Settings', root_path, class: 'dropdown-item' %>
+		<%= link_to 'Billing', root_path, class: 'dropdown-item' %>
+		<hr>
+		<%= link_to 'Logout', root_path, class: 'dropdown-item' %>
+	</div>
+</li>
+-->

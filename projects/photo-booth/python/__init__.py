@@ -38,7 +38,7 @@ if GPIO:
 # setup booth variables
 booth 	= {
 	'sequence': 	{
-		'active': 		False,
+		'active': 		True,
 		'wait': 		WAIT,
 		'snapshots': 	SNAPSHOTS,
 		'clock': 		0
@@ -89,6 +89,8 @@ try:
 				if booth['sequence']['wait'] == 0 and booth['sequence']['snapshots'] > 0:
 					# take snapshot
 					print('taking snapshot...')
+					cv2.imwrite('snapshots/' + str(datetime.datetime.now()) + '.jpg',frame)
+					print('took snap')
 					cv2.putText(frame, "Number: %d" % booth['sequence']['wait'],(105, 105),cv2.FONT_HERSHEY_COMPLEX_SMALL,.7,(0,0,0))
 					# decrement snapshots
 					booth['sequence']['snapshots']-=1

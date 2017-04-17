@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @transaction.provider_id %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @transaction.patient_id %>
+</p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @transaction.transaction_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>Success:</strong>
+  <%= @transaction.success %>
+</p>
+
+<p>
+  <strong>Response:</strong>
+  <%= @transaction.response %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

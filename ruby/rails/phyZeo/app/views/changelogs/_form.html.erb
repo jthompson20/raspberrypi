@@ -1,0 +1,37 @@
+<%= form_for(changelog) do |f| %>
+  <% if changelog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(changelog.errors.count, "error") %> prohibited this changelog from being saved:</h2>
+
+      <ul>
+      <% changelog.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :action %>
+    <%= f.text_field :action %>
+  </div>
+
+  <div class="field">
+    <%= f.label :success %>
+    <%= f.number_field :success %>
+  </div>
+
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provider_id: 1
+  patient_id: 1
+  transaction_id: MyString
+  amount: 1.5
+  success: 1
+  response: MyText
+
+two:
+  provider_id: 1
+  patient_id: 1
+  transaction_id: MyString
+  amount: 1.5
+  success: 1
+  response: MyText
