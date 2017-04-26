@@ -4,6 +4,7 @@ import sys
 import PIL
 from PIL import Image
 from PIL import ImageOps
+import os
 
 # "0" is the port of your built-in webcam, probably.
 camera_port = 0
@@ -39,42 +40,67 @@ def get_image():
   image = Image.fromarray(image)
   return image
 
-# Warm up the camera to make sure the lightning/focus adjusts.
-print 'Warming up...'
-for i in xrange(ramp_frames):
-  temp = get_image()
+def begin():
 
-# Determine a desired width/height for our frames based on common variables.
-target_height = (strip_height - ((strip_rows + 1) * row_gutter)) / strip_rows
-target_width = (strip_width - ((strip_columns - 1) * column_gutter)) / strip_columns
+  # Warm up the camera to make sure the lightning/focus adjusts.
+  print 'Warming up...'
+  os.system('afplay wav/welcome.wav')
+  for i in xrange(ramp_frames):
+    temp = get_image()
 
-for row in xrange(strip_rows):
-  # Wait for our users to pose. Wait time doesn't account for execution time 
-  # because I'm lazy.
-  for i in xrange(wait_time):
-    print '%s...' % (wait_time - i)
-    time.sleep(1)
-  print 'Smile!'
-  time.sleep(.5)
-  
-  # Grab an image from the webcam.
-  image = get_image()
-  
-  # Scale/crop the image to fit our desired width/height.
-  image = ImageOps.fit(image, (target_width, target_height), PIL.Image.LANCZOS)
-  
-  y = (row * target_height) + ((row+1) * row_gutter)
-  
-  for column in xrange(strip_columns):
-    x = (column * target_width) + (column * column_gutter)
-    # Check if this column should be grayscaled.
-    if column_grayscale[column]:
-      strip.paste(ImageOps.grayscale(image), (x, y))
-    else:
-      strip.paste(image, (x, y))
+  # Determine a desired width/height for our frames based on common variables.
+  target_height = (strip_height - ((strip_rows + 1) * row_gutter)) / strip_rows
+  target_width = (strip_width - ((strip_columns - 1) * column_gutter)) / strip_columns
 
-# Show the strip to the user, this is where you'd put print/save code as well.
-strip.show();
+  for row in xrange(strip_rows):
+    # Wait for our users to pose. Wait time doesn't account for execution time 
+    # because I'm lazy.
+    for i in xrange(wait_time):
+      print '%s...' % (wait_time - i)
+      os.system('afplay wav/%s.wav' % i)
+      #time.sleep(1)
+    print 'Smile!'
+    os.system('afplay wav/cheese.wav')
+    #time.sleep(.5)
+    
+    # Grab an image from the webcam.
+    image = get_image()
+    
+    # Scale/crop the image to fit our desired width/height.
+    image = ImageOps.fit(image, (target_width, target_height), PIL.Image.LANCZOS)
+    
+    y = (row * target_height) + ((row+1) * row_gutter)
+    
+    for column in xrange(strip_columns):
+      x = (column * target_width) + (column * column_gutter)
+      # Check if this column should be grayscaled.
+      if column_grayscale[column]:
+        strip.paste(ImageOps.grayscale(image), (x, y))
+      else:
+        strip.paste(image, (x, y))
 
-# Make sure our camera connection is closed.
-del(camera)
+    os.system('afplay wav/again.wav')
+
+  # Show the strip to the user, this is where you'd put print/save code as well.
+  strip.show();
+
+  # Make sure our camera connection is closed.
+  #del(camera)
+
+
+
+
+
+
+
+
+while True:
+  raw_input('push any button to begin')
+  begin()
+
+
+
+
+
+
+

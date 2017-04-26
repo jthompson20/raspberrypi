@@ -7,8 +7,6 @@ from signal import pause
 import imutils
 import cv2
 import sys
-import cv2
-import sys
 import time
 import datetime
 
