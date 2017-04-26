@@ -118,10 +118,10 @@ class PhotoBooth:
 		print('starting live')
 		while self.camera.isOpened():
 			retval, frame 	= self.camera.read()
-			gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+			#gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 			# Display the resulting frame
-			cv2.imshow('Live Feed',gray)
+			cv2.imshow('Live Feed',frame)
 			if cv2.waitKey(1) & 0xFF == ord('q'):
 				break
 
@@ -155,8 +155,8 @@ try:
 		t.start()
 	'''
 
-	#threading.Thread(target=booth.live(), args=()).start()
-	threading.Thread(target=booth.sleep(), args=()).start()
+	threading.Thread(target=booth.live(), args=()).start()
+	#threading.Thread(target=booth.sleep(), args=()).start()
 
 except KeyboardInterrupt:
 	print('KEYBOARD INTERRUPT\n')
