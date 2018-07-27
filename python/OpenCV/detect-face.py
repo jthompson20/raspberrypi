@@ -1,5 +1,6 @@
 import cv2
 import sys
+import random
 
 cascPath 	= 'haar/face.xml' #sys.argv[1]
 faceCascade = cv2.CascadeClassifier(cascPath)
@@ -17,12 +18,16 @@ while True:
         scaleFactor=1.1,
         minNeighbors=5,
         minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+        flags=cv2.CASCADE_SCALE_IMAGE
     )
 
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+        person      = random.choice(["Matt","Jess"])
+
+        cv2.putText(frame,'Person: ' + person,(x,y), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,255,255),2,cv2.LINE_AA)
 
     # Display the resulting frame
     cv2.imshow('Video', frame)

@@ -7,7 +7,6 @@ from PIL import Image
 from PIL import ImageOps
 import os
 import os.path
-import threading
 
 class PhotoBooth:
 
